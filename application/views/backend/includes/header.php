@@ -9,6 +9,13 @@
 
     <!-- Bootstrap -->
     <link href="<?= base_url().'assets/css/bootstrap.min.css'?>" rel="stylesheet">
+    <link rel="stylesheet" href="<?= base_url() ?>assets/vendor/css/fontawesome.css">
+
+    <!-- Scripts -->
+    <script src="<?= base_url() ?>assets/vendor/js/sweetalert.js"></script>
+    <script src="<?= base_url() ?>assets/vendor/js/jquery-3.3.1.slim.min.js"></script>
+    <script src="<?= base_url() ?>assets/vendor/js/ajax.js"></script>
+    <script src="<?= base_url() ?>assets/js/bootstrap.min.js"></script>
     
   </head>
   <body>

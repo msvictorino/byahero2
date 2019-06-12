@@ -5,12 +5,18 @@ class Login extends CI_Controller {
 
     public function __construct(){
         parent::__construct(); 
-
+        if($this->session->is_logged_in){
+            $checkData = array("uuid" => $this->session->uuid);
+            if(!($this->user->fetch("users", $checkData)))
+                $this->logout();
+            else
+                redirect("/"); 
+        }
     }
  
     public function index(){
-        $this->load->view('frontend/includes/header');
-        $this->load->view('frontend/includes/navbar');
+        $data["curr_path"] = $this->uri->segment(1); 
+        $this->load->view('frontend/includes/header', $data);
         $this->load->view('frontend/login');
         $this->load->view('frontend/includes/footer');
     }
@@ -19,27 +25,28 @@ class Login extends CI_Controller {
 
         $this->validate('email','Email Address', 'required|strip_tags|trim|xss_clean');
         $this->validate('password','Password', 'required|strip_tags|trim|xss_clean');
-
+        $response = array("success" => FALSE, "message" => "There was an error, please try again!");
         if($this->form_validation->run()) {
 
             $data = array(
                 "email" => $this->_post("email"),
-                "password" => $this->_post("password"), 
+                // "password" => sha1($this->_post("password")), 
             );
             $user = $this->user->fetch("users", $data);
             if(count($user) > 0 ){
                 $user = $user[0];
-                $sess_data = array("is_logged_in" => TRUE, "uuid" => $user->uuid);
-                $this->session->set_userdata($sess_data);
-                $response["message"] = "Successfully Login";
-                $response["success"] = TRUE;
-                $response["errormsg"] = FALSE;
-                
-                // if($this->insert_logs($user->id,0,"Login",1)){
-                //     $validator['message'] = 'Login Successfully';
-                //     $validator['success'] = true;
-                //     $validator['errormsg'] = false;
-                // }
+                if(password_verify($this->_post("password"), $user->password)){
+                    $sess_data = array("is_logged_in" => TRUE, "uuid" => $user->uuid);
+                    $this->session->set_userdata($sess_data);
+                    $response["message"] = "Successfully Login";
+                    $response["success"] = TRUE;
+                    $response["errormsg"] = FALSE;
+                }
+                else{
+                    $response['message'] = 'Invalid Account';
+                    $response['errormsg'] = true;
+                    $response['success'] = false;
+                } 
 
             }
             else{
@@ -58,6 +65,10 @@ class Login extends CI_Controller {
         }
         echo json_encode($response);
 
+    }
+
+    public function logout(){
+        $this->session->sess_destroy();
     }
 
     public function createAudit(){

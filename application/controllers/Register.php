@@ -9,6 +9,7 @@ class Login extends CI_Controller {
     }
  
     public function index(){
+        $data["curr_path"] = $this->uri->segment(1); 
         $this->load->view('frontend/includes/header');
         $this->load->view('frontend/includes/navbar');
         $this->load->view('frontend/register');
