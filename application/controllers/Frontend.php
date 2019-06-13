@@ -47,6 +47,10 @@ class Frontend extends CI_Controller {
         $this->load->view('frontend/includes/footer');
     }
 
+    public function logout(){
+        $this->session->sess_destroy();
+    }
+
 
     
 }

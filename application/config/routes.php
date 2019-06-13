@@ -57,3 +57,6 @@ $route["about"] = "frontend/about";
 $route["promo"] = "frontend/promo";
 $route["package"] = "frontend/package";
 $route["contact"] = "frontend/contact";
+
+
+$route["logout"] = "frontend/logout";

@@ -16,7 +16,7 @@
     <script src="<?= base_url() ?>assets/vendor/js/jquery-3.3.1.slim.min.js"></script>
     <script src="<?= base_url() ?>assets/vendor/js/ajax.js"></script>
     <script src="<?= base_url() ?>assets/js/bootstrap.min.js"></script>
-    <script src="<?= base_url() ?>assets/custom/js/frontend.js"></script>
+    <script src="<?= base_url() ?>assets/custom/frontend/js/frontend.js"></script>
     
   </head>
   <body>
