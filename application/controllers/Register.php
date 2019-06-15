@@ -2,7 +2,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Login extends CI_Controller {
+class Register extends CI_Controller {
 
     public function __construct(){
         parent::__construct(); 
@@ -10,8 +10,7 @@ class Login extends CI_Controller {
  
     public function index(){
         $data["curr_path"] = $this->uri->segment(1); 
-        $this->load->view('frontend/includes/header');
-        $this->load->view('frontend/includes/navbar');
+        $this->load->view('frontend/includes/header', $data);
         $this->load->view('frontend/register');
         $this->load->view('frontend/includes/footer');
     }

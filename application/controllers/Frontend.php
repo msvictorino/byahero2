@@ -10,9 +10,10 @@ class Frontend extends CI_Controller {
     //About Us DISPLAY
     public function index(){
         $data["curr_path"] = $this->uri->segment(1);
-        $this->load->view('frontend/includes/header', $data);
-        $this->load->view('frontend/pages/home');
-        $this->load->view('frontend/includes/footer');
+        $this->load->view('frontend/includes/header2', $data);
+        $this->load->view('frontend/includes/navbar2');
+        $this->load->view('frontend/index');
+        $this->load->view('frontend/includes/footer2');
     }
 
     //About Us DISPLAY

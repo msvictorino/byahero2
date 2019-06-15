@@ -1,6 +1,6 @@
     
     <!-- <link href="<?= base_url().'assets/css/floating-labels.css'?>" rel="stylesheet"> -->
-      <style>
+    <style>
         .bd-placeholder-img {
           font-size: 1.125rem;
           text-anchor: middle;
@@ -14,17 +14,88 @@
           .bd-placeholder-img-lg {
             font-size: 3.5rem;
           }
-        } 
+        }
+        
+          .form-signin {
+          width: 100%;
+          max-width: 420px;
+          padding: 15px;
+          margin: auto;
+          padding-top: 100px;
+          }
+
+          .form-label-group {
+          position: relative;
+          margin-bottom: 1rem;
+          }
+
+          .form-label-group > input,
+          .form-label-group > label {
+          height: 3.125rem;
+          padding: .75rem;
+          }
+
+          .form-label-group > label {
+          position: absolute;
+          top: 0;
+          left: 0;
+          display: block;
+          width: 100%;
+          margin-bottom: 0; /* Override default `<label>` margin */
+          line-height: 1.5;
+          color: #495057;
+          pointer-events: none;
+          cursor: text; /* Match the input under the label */
+          border: 1px solid transparent;
+          border-radius: .25rem;
+          transition: all .1s ease-in-out;
+          }
+
+          .form-label-group input::-webkit-input-placeholder {
+          color: transparent;
+          }
+
+          .form-label-group input:-ms-input-placeholder {
+          color: transparent;
+          }
+
+          .form-label-group input::-ms-input-placeholder {
+          color: transparent;
+          }
+
+          .form-label-group input::-moz-placeholder {
+          color: transparent;
+          }
+
+          .form-label-group input::placeholder {
+          color: transparent;
+          }
+
+          .form-label-group input:not(:placeholder-shown) {
+          padding-top: 1.25rem;
+          padding-bottom: .25rem;
+          }
+
+          .form-label-group input:not(:placeholder-shown) ~ label {
+          padding-top: .25rem;
+          padding-bottom: .25rem;
+          font-size: 12px;
+          color: #777;
+          }
+
+  }
+} 
       </style>
 
   <!-- <div class="jumbotron"> -->
     <div class="container">
       <div class="row">
-        <div class="col-md-6 col-sm-12 mx-auto my-auto">
-          <form class="form-signin">
+        <div class="col-lg-6 col-sm-12 mx-auto my-auto" style="padding-top: 60px">
+      
             <img src="<?= base_url().'img/logo.png'?>"">
-          </form>
+          
         </div>
+
         <div class="col-md-6 col-sm-12 mx-auto my-auto">
           
           <form class="form-signin" id="frm-login">
