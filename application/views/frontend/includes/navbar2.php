@@ -13,7 +13,7 @@
             <a class="nav-link js-scroll-trigger" href="#services">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#portfolio">About Us</a>
+            <a class="nav-link js-scroll-trigger" href="#about">About Us</a>
           </li>
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#about">Travel Promos</a>
@@ -22,7 +22,7 @@
             <a class="nav-link js-scroll-trigger" href="#team">Travel Packages</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#contact">Contact Us</a>
+            <a class="nav-link js-scroll-trigger" href="#contactus">Contact Us</a>
           </li>
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="<?= base_url().'Login/index'?>">Login</a>
