@@ -5,7 +5,23 @@
       <div class="intro-text">
         <div class="intro-lead-in">Start your getaway here with us!</div>
        <center>  <img src="<?= base_url()?>img/frontend/logos/logo.png" alt="Italian Trulli"> <br>
-              <a class="btn btn-primary btn-block btn-md style="background-color: #FE9900;" href= "#services"><B style="color:white"> Find Tours</B></a>
+              
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label for="mobilenum">Mobile Number</label>
+                    <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+                    <div class="invalid-feedback">
+                      Valid first name is required.
+                    </div>
+                  </div>
+                  <div class="col-md-4 mb-3">
+                    <label for="lastName">Landline Number</label>
+                    <input type="text" class="form-control" id="lastName" placeholder="" value="">
+                  </div>
+                </div>
+                  <button class="btn btn-primary btn-md style="background-color: #FE9900;" href= "#services"><B style="color:white"> Find Tours</B></a>
+
+                </div>
               </center>
           </form>
       </div>
@@ -242,7 +258,7 @@
         <div class="col-sm-4">
           <div class="team-member">
             <img class="mx-auto rounded-circle" src="<?= base_url()?>img/frontend/team/1.jpg" alt="">
-            <h4>Kay Garland</h4>
+            <h4>Coleen Santiano</h4>
             <p class="text-muted">Lead Designer</p>
             <ul class="list-inline social-buttons">
               <li class="list-inline-item">
@@ -266,8 +282,8 @@
         <div class="col-sm-4">
           <div class="team-member">
             <img class="mx-auto rounded-circle" src="<?= base_url()?>img/frontend/team/2.jpg" alt="">
-            <h4>Larry Parker</h4>
-            <p class="text-muted">Lead Marketer</p>
+            <h4>JM Urgelles</h4>
+            <p class="text-muted">Leader of the Band</p>
             <ul class="list-inline social-buttons">
               <li class="list-inline-item">
                 <a href="#">
@@ -290,7 +306,7 @@
         <div class="col-sm-4">
           <div class="team-member">
             <img class="mx-auto rounded-circle" src="<?= base_url()?>img/frontend/team/3.jpg" alt="">
-            <h4>Diana Pertersen</h4>
+            <h4>Mica Victorino</h4>
             <p class="text-muted">Lead Developer</p>
             <ul class="list-inline social-buttons">
               <li class="list-inline-item">
