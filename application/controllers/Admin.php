@@ -5,7 +5,14 @@ class Admin extends CI_Controller {
 
     public function __construct(){
         parent::__construct();
-      //  $this->load->model('AdminModel'); 
+        if($this->session->is_logged_in && $this->session->role == "admin"){
+            $checkData = array("uuid" => $this->session->uuid);
+            if(!($this->user->fetch("users", $checkData)))
+                $this->logout(); 
+        }
+        else{
+            redirect("/");
+        } 
     }
    
     //About Us DISPLAY
@@ -17,6 +24,20 @@ class Admin extends CI_Controller {
         $this->load->view('backend/includes/header', $data);
         $this->load->view('backend/index');
         $this->load->view('backend/includes/footer');
+    }
+
+    public function user(){
+        $data["curr_path"] = $this->uri->segment(1);
+        $data["users"] = $this->user->fetch("users");
+        $this->load->view('backend/includes/header', $data);
+        $this->load->view('backend/modules/user');
+        $this->load->view('backend/includes/footer');
+    }
+
+    
+    public function logout(){
+        $this->session->sess_destroy();
+        redirect("/");
     }
 
 

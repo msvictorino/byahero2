@@ -33,10 +33,10 @@ class Login extends CI_Controller {
                 // "password" => sha1($this->_post("password")), 
             );
             $user = $this->user->fetch("users", $data);
-            if(count($user) > 0 ){
+            if($user){
                 $user = $user[0];
                 if(password_verify($this->_post("password"), $user->password)){
-                    $sess_data = array("is_logged_in" => TRUE, "uuid" => $user->uuid);
+                    $sess_data = array("is_logged_in" => TRUE, "uuid" => $user->uuid, "role" => $user->role, "user" => $user);
                     $this->session->set_userdata($sess_data);
                     $response["message"] = "Successfully Login";
                     $response["success"] = TRUE;
