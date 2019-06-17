@@ -37,11 +37,12 @@ class User_model extends CI_Model {
 
     function fetch_like($table, $columns = NULL, $like = NULL, $order = NULL){  
         if($like !== NULL && $like != ""){
-            if($columns != NULL){
-                foreach($columns as $c){
-                    $this->db->like($c, $like, 'both');
-                }
-            }
+            // if($columns != NULL){
+            //     foreach($columns as $c){
+            //         $this->db->like($c, $like, 'both');
+            //     }
+            // }
+            $this->db->or_like($columns);
         }
         if($order !== NULL){
             $this->db->order_by($order, 'desc');
@@ -52,11 +53,7 @@ class User_model extends CI_Model {
 
     function fetchPagination($table, $columns = NULL, $like = NULL, $order = NULL, $limit = NULL, $start = NULL){  
         if($like !== NULL && $like != ""){
-            if($columns != NULL){
-                foreach($columns as $c){
-                    $this->db->like($c, $like, 'both');
-                }
-            }
+            $this->db->or_like($columns);
         }
         if($order !== NULL){
             $this->db->order_by($order, 'asc');

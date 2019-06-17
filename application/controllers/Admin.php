@@ -27,11 +27,34 @@ class Admin extends CI_Controller {
     }
 
     public function user(){
-        $data["curr_path"] = $this->uri->segment(1);
+        $data["curr_path"] = $this->uri->segment(2);
         $data["users"] = $this->user->fetch("users");
-        $this->load->view('backend/includes/header', $data);
-        $this->load->view('backend/modules/user');
-        $this->load->view('backend/includes/footer');
+        $data['uuid'] = $uuid = $this->uri->segment(3);
+        $is_uuid = FALSE; 
+        if($uuid != ""){ 
+            $user = $this->user->fetch("users", array('uuid' => $uuid));   
+            if($user){
+                if(count($user) > 0)
+                    $is_uuid = TRUE; 
+                else 
+                    print_r("tyst"); 
+            }
+            else
+                show_404();
+        }  
+        if($is_uuid){ 
+            $user = $user[0];
+            $data["user"] = $user;
+            $this->load->view('backend/includes/header', $data);
+            $this->load->view('backend/modules/user/user');
+            $this->load->view('backend/includes/footer');
+        }
+        else{
+            $this->load->view('backend/includes/header', $data);
+            $this->load->view('backend/modules/user/index');
+            $this->load->view('backend/includes/footer');
+        }
+        // print_r($data);
     }
 
     
