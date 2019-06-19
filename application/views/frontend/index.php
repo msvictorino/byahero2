@@ -49,8 +49,8 @@
     </div>
   </header>
 
-  <!-- Services -->
-  <section class="page-section" id="services">
+  <!-- Popular Destinations -->
+  <section class="bg-light page-section" id="services">
     <div class="container">
       <div class="row">
         <div class="col-lg-12 text-center">
@@ -67,7 +67,7 @@
               <div class="card-body mb">
                 <h5 class="card-title">Card title</h5>
                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <button type="button" class="btn btn-primary mb">button</button>
+                <button type="button" class="btn btn-primary mb">Read More</button>
               </div>
               <div class="card-footer">
               <span class="fa fa-star checked"></span>
@@ -84,7 +84,7 @@
               <div class="card-body mb">
                 <h5 class="card-title">Card title</h5>
                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <button type="button" class="btn btn-primary mb">button</button>
+                <button type="button" class="btn btn-primary mb">Read More</button>
               </div>
               <div class="card-footer">
               <span class="fa fa-star checked"></span>
@@ -101,7 +101,7 @@
               <div class="card-body mb">
                 <h5 class="card-title">Card title</h5>
                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <button type="button" class="btn btn-primary mb">button</button>
+                <button type="button" class="btn btn-primary mb">Read More</button>
               </div>
               <div class="card-footer">
               <span class="fa fa-star checked"></span>
