@@ -16,9 +16,6 @@
             <a class="nav-link js-scroll-trigger" href="#about">About Us</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#about">Travel Promos</a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#team">Travel Packages</a>
           </li>
           <li class="nav-item">
