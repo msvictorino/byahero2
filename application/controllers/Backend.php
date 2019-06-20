@@ -118,4 +118,71 @@ class Backend extends CI_Controller {
 
     }
 
+    public function updateUser(){
+        $this->validate("first_name","First Name", "required|strip_tags|trim|xss_clean");
+        $this->validate("last_name","First Name", "required|strip_tags|trim|xss_clean");
+        $this->validate("email","Email Address", "required|strip_tags|trim|xss_clean");
+        $this->validate("username","Username", "required|strip_tags|trim|xss_clean");
+
+        if( hash_equals($this->session->csrf, $this->_post('csrf')) ){
+            if($this->form_validation->run()){
+                $data = array(
+                    "first_name" => $this->_post("first_name"),
+                    "last_name" => $this->_post("last_name"),
+                    "email" => $this->_post("email"),
+                    "username" => $this->_post("username"),
+                    "birthday" => $this->_post("birthday"),
+                    "marital_status" => $this->_post("marital_status"),
+                    "gender" => $this->_post("gender"),
+                    "contact_no" => $this->_post("contact_no"),
+                    "tel_no" => $this->_post("tel_no"),
+                    "address" => $this->_post("address"),
+                    "city" => $this->_post("city"),
+                    "zip" => $this->_post("zip"),
+                );
+                $where = array(
+                    "id" => $this->_post("user_id"),
+                );
+                $this->admin->update("users", $data, $where);
+                $response["message"] = "Successfully Updated";
+                $response["success"] = TRUE;
+            }
+            else{
+                foreach ($_POST as $key => $value) {
+                    $response['messages'][$key] = form_error($key);
+                    $response['success'] = false;
+                    $response['errormsg'] = false;
+                }
+                $response["message"] = "Please check your fields again!";
+            }
+        }
+        else{
+
+            $response['message'] = "Error Occured, Please try again!";
+            $response['success'] = false;
+            
+        }
+
+        echo json_encode($response);
+        // $data 
+    }
+
+    public function createAudit(){
+        // $data = array(
+        //     "user_type" =>
+        // );
+        // $this->user->insert("audits", $data);
+    }
+
+	// custom method for post
+	public function _post($value){ 
+        return is_array($this->input->post($value,true)) ? $this->input->post($value,true) : strip_tags($this->input->post($value,true));
+	}
+
+	// costum method for $this->form_validation->set_rules();
+    public function validate($param1,$param2,$param3) {
+        return $this->form_validation->set_rules($param1,$param2,$param3);
+    } 
+
+
 }

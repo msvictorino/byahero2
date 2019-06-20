@@ -21,7 +21,7 @@ class User_model extends CI_Model {
         if(!empty($where)){
             $this->db->where($where);
         }
-        return $this->db->update($table,$data);
+        $this->db->update($table,$data);
     }
             
     function fetch($table,$where=NULL,$order = NULL){  

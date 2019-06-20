@@ -9,6 +9,8 @@ class Admin extends CI_Controller {
             $checkData = array("uuid" => $this->session->uuid);
             if(!($this->user->fetch("users", $checkData)))
                 $this->logout(); 
+            else         
+                $this->session->set_userdata("csrf", NULL);
         }
         else{
             redirect("/");
@@ -30,6 +32,11 @@ class Admin extends CI_Controller {
         $data["curr_path"] = $this->uri->segment(2);
         $data["users"] = $this->user->fetch("users");
         $data['uuid'] = $uuid = $this->uri->segment(3);
+        $csrf = $this->session->csrf;
+        if (!$this->session->has_userdata('csrf') || empty($this->session->csrf)) {
+            $csrf = bin2hex(random_bytes(32));
+            $this->session->set_userdata('csrf', $csrf); 
+        } 
         $is_uuid = FALSE; 
         if($uuid != ""){ 
             $user = $this->user->fetch("users", array('uuid' => $uuid));   
@@ -45,6 +52,7 @@ class Admin extends CI_Controller {
         if($is_uuid){ 
             $user = $user[0];
             $data["user"] = $user;
+            $data["csrf"] = $csrf;
             $this->load->view('backend/includes/header', $data);
             $this->load->view('backend/modules/user/user');
             $this->load->view('backend/includes/footer');

@@ -45,7 +45,40 @@ $(document).ready(function(){
         load_user_data(page, s);
         console.log(s);
     });
+
+    $("#frm-user-update").submit(function(e){
+        e.preventDefault();
+        var formData = $(this).serialize();
+        $.ajax({
+            url: app_url + "backend/updateUser",
+            type: "POST",
+            data: formData,
+            dataType: "json",
+            success: function(response){
+                console.log(response);
+                if(response.success){
+                    notify(response.message, "success");
+                    setTimeout(() => {
+                        window.location = "../user";
+                    }, 1000);
+                }
+                else{
+                    notify(response.message, "warning");
+                }
+            },
+            error: function(response){
+                console.log(response);
+            }
+        })
+    });
     
     load_user_data(page);
+
+    function notify(title, type){
+        swal({
+            title: title,
+            icon: type,
+        });
+    }
    
    });
