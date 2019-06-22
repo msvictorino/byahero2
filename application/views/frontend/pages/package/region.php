@@ -3,12 +3,21 @@
 #pribtn {
 	width:40%;
 	height:100px;
-	margin:10px;
-	border-radius:9px;
-	background-color:#FE9900;
-	color:white;
-	font-size:280%;
+	background-color: #FE9900; /* Green */
+    border: none;
+    color: white;
+    padding: 20px;
+    text-align: center;
     text-decoration: none;
+    display: inline-block;
+    font-size: 280%;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.btn-regions{
+	border-radius: 12px;
+	background-color:#FE9900;
 }
 
 </style>
@@ -19,9 +28,9 @@
               <h2 class="section-heading text-uppercase">Travel Packages</h2>
               <br><br>
               <div class="container">
-                  <a id="pribtn" type="button" href="<?= base_url('frontend/package?region=luzon') ?>">Luzon</a>
-                  <a id="pribtn" type="button" href="<?= base_url('frontend/package?region=visayas') ?>">Visayas</a>
-                  <a id="pribtn" type="button" href="<?= base_url('frontend/package?region=mindanao') ?>">Mindanao</a>
+                  <a id="pribtn" class="btn-regions" type="button" href="<?= base_url('package?region=luzon') ?>">Luzon</a>
+                  <a id="pribtn" class="btn-regions" type="button" href="<?= base_url('package?region=visayas') ?>">Visayas</a>
+                  <a id="pribtn" class="btn-regions" type="button" href="<?= base_url('package?region=mindanao') ?>">Mindanao</a>
               </div>
             </div>
           </div>

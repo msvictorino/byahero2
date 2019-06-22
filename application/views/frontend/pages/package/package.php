@@ -75,57 +75,110 @@ h3{
 </style>
 
 <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <h3>Package Selection </h3> <br>
-            </div>
-            <div class="col-sm-12">
-                <div class="card">
-                    <div class="card-media">
-                        <a href="#">
-                            <img src="https://images-na.ssl-images-amazon.com/images/I/61pmrFT-M7L._AC_US218_.jpg" alt="product name">
-                        </a>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">
-                               Cebu Tours
-                        </h5>
-                        <div class="col-md-8 mb-3">
-                          <select class="custom-select d-block w-100" id="country" required>
-                            <option value="">Select Package</option>
-                            <option>Tour 1</option>
-                            <option>Tour 2</option>     
-                          </select>
-                        </div>
-                        <div class="col-md-8 mb-3">
-                          <select class="custom-select d-block w-100" id="country" required>
-                            <option value="">Number of Pax</option>
-                            <option>1</option>
-                            <option>2</option>     
-                          </select>
-                        </div>
-                        <div class="col-md-8 mb-3">
-                          <select class="custom-select d-block w-100" id="country" required>
-                            <option value="">Schedule</option>
-                            <option>May 23, 2019</option>
-                            <option>August 1, 2019</option>     
-                          </select>
-                        </div>
-            <div class="row">
-              <div class="col-md-4 mb-3">
-                    <button class="btn" type="submit" style="background-color: #FE9900;"><B style="color:white">Book Now</B></button>
-
-            </div>
-            <div class="col-md-4 mb-3">
-                    <button class="btn" type="submit" style="background-color: #FE9900;"><B style="color:white">View Details</B></button>
-
-            </div>
+  <div class="row">
+      <div class="col-sm-12">
+          <h3>Package Selection </h3> <br>
+      </div>
+  </div>
+  <div class="row">
+    <?php
+    if($tours){
+      foreach($tours as $t):
+    ?>
+      <div class="col-sm-12 p-2">
+    <form class="frm-package">
+        <div class="card">
+          <div class="card-media">
+              <a href="#">
+                  <img src="https://images-na.ssl-images-amazon.com/images/I/61pmrFT-M7L._AC_US218_.jpg" alt="DESTINATION NAME">
+              </a>
           </div>
-        </div>
-        </div>
-                        </div>
-                    </div>
+          <div class="card-body">
+            <input type="hidden" value="<?= $t-> id?>" name="tour_id">
+            <h5 class="card-title">
+                    <?= $t->name ?> 
+            </h5>
+            <div class="col-md-8 mb-3">
+              <select class="custom-select d-block w-100" name="package" id="package" required>
+                <option value="">Select Package</option>
+                <?php 
+                  if($packages){
+                    foreach($packages as $p):
+                      if($p->tour_id == $t->id):
+                    ?>
+                      <option value="<?= $p->id ?>"><?= $p-> name ?></option>
+                    <?php
+                    endif;
+                    endforeach;
+                  }
+                ?>
+              </select>
+            </div>
+            <div class="col-md-8 mb-3">
+              <select class="custom-select d-block w-100" name="pax" required>
+                <option value="">Number of Pax</option>
+                <?php
+                  for($i = 1; $i <= (intval($t->pax)) ; $i++){
+                    ?>
+                      <option value="<?= $i ?>"><?= $i ?></option>
+                    <?php
+                  }
+                ?>    
+              </select>
+            </div>
+            <div class="col-md-8 mb-3 form-inline">
+                <div class="form-group">
+                  <select class="custom-select d-block mr-2 " name="month"  required>
+                    <option >Select Month</option>     
+                    <?php
+                      $months = array("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec");
+                      for($i = 1;$i <= 12; $i++){
+                        ?>
+                        <option value="<?= $i ?>"><?= $months[$i-1] ?></option>
+                        <?php
+
+                      }
+                    ?>
+                  </select>
+                  <select class="custom-select d-block mr-2 " name="day"  required>
+                    <option >Select Day</option>     
+                    <?php
+                      for($i = 1;$i <= 31; $i++){
+                        ?>
+                        <option value="<?= $i ?>"><?= $i ?></option>
+                        <?php
+
+                      }
+                    ?>
+                  </select>
+                  <select class="custom-select d-block" name="year"  required>
+                    <option >Select Year</option>     
+                    <?php
+                      $currentYear = date('Y');
+                      for($i = $currentYear + 1; $i >= $currentYear; $i--){
+                        ?>
+                        <option value="<?= $i ?>"><?= $i ?></option>
+                        <?php
+
+                      }
+                    ?>
+                  </select>
                 </div>
             </div>
-        </div>
+            <div class="row">
+              <div class="col-md-4 ml-3 mb-3">
+                  <button class="btn" type="submit" style="background-color: #FE9900;"><B style="color:white">Book Now</B></button>
+
+              </div>
+              <div class="col-md-4 mb-3">
+                      <button class="btn" type="submit" style="background-color: #FE9900;"><B style="color:white">View Details</B></button>
+
+              </div>
+            </div>
+          </div> 
+        </form>
+      </div>
     </div>
+    <?php endforeach; }?>
+  </div>
+</div>

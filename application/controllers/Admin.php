@@ -65,7 +65,9 @@ class Admin extends CI_Controller {
         // print_r($data);
     }
 
-    
+    public function createCSRF(){
+        
+    }
     public function logout(){
         $this->session->sess_destroy();
         redirect("/");
