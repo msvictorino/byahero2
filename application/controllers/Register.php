@@ -10,6 +10,8 @@ class Register extends CI_Controller {
  
     public function index(){
         $data["curr_path"] = $this->uri->segment(1); 
+        $data["csrf"] = $csrf = bin2hex(rand(32, 999999));
+        $this->session->set_userdata('csrf', $csrf); 
         $this->load->view('frontend/includes/header', $data);
         $this->load->view('frontend/register');
         $this->load->view('frontend/includes/footer');
@@ -19,29 +21,25 @@ class Register extends CI_Controller {
         
         $this->validate('first_name','First Name', 'required|strip_tags|trim|xss_clean');
         $this->validate('last_name','Last Name', 'required|strip_tags|trim|xss_clean');
-        $this->validate('email','Email Address', 'required|strip_tags|trim|xss_clean|is_unique[users.email');
-        $this->validate('password','Password', 'required|strip_tags|trim|xss_clean');
-        $this->validate('confirm_password ','Confirm Password', 'required|strip_tags|trim|xss_clean|matches[confirm_password]');
+        $this->validate('email','Email Address', 'required|strip_tags|trim|xss_clean|valid_email|is_unique[users.email]');
         $this->validate('birthday','Birthday', 'required|strip_tags|trim|xss_clean');
         $this->validate('marital_status','Marital Status', 'required|strip_tags|trim|xss_clean');
         $this->validate('gender','Gender', 'required|strip_tags|trim|xss_clean');
         $this->validate('contact_no','Contact Number', 'required|strip_tags|trim|xss_clean');
-        $this->validate('tel_no','Telephone Number', 'required|strip_tags|trim|xss_clean');
         $this->validate('address','Address', 'required|strip_tags|trim|xss_clean');
-        $this->validate('city','City', 'required|strip_tags|trim|xss_clean');
-        $this->validate('province','Province', 'strip_tags|trim|xss_clean');
-        $this->validate('zip','ZIP CODE', 'required|strip_tags|trim|xss_clean');
         
         $response = array("success" => FALSE, "message" => "There was an error, please try again!");
-        
-        if($this->form_validation->run()){
+        $response["password"] = $this->_post("password");
+        $response["rpassword"] = $this->_post("rpassword");
+        $response["is_password"] = $response["password"] == $response["rpassword"];
+        if($this->form_validation->run() && ($response["password"] == $response["rpassword"]) ){
             $data = array(
                 "first_name" => $this->_post("first_name"),
                 "last_name" => $this->_post("last_name"),
                 "email" => $this->_post("email"),
                 "password" => $this->_post("password"),
                 "birthday" => $this->_post("birthday"),
-                "marital_status" => $this->post("marital _status"),
+                "marital_status" => $this->_post("marital_status"),
                 "gender" => $this->_post("gender"),
                 "contact_no" => $this->_post("contact_no"),
                 "tel_no" => $this->_post("tel_no"),
@@ -51,17 +49,23 @@ class Register extends CI_Controller {
                 "zip" => $this->_post("zip"),
                 "uuid" => $this->get_uuid(),
             );
-            if($this->user->insert("users", $data)){
                 $response["message"] = "Successfully Registered";
                 $response["success"] = TRUE;
-                $response["errormsg"] = FALSE;
-            }
-            else{
+            // exit();
+            // if($this->user->insert("users", $data)){
+            //     $response["message"] = "Successfully Registered";
+            //     $response["success"] = TRUE;
+            //     $response["errormsg"] = FALSE;
+            //     if($this->session->is_booking){
+            //         $response["is_booking"] = TRUE;
+            //     }
+            // }
+            // else{
                 
-                $response['message'] = 'Failed Registration';
-                $response['errormsg'] = true;
-                $response['success'] = false;
-            }
+            //     $response['message'] = 'Failed Registration';
+            //     $response['errormsg'] = true;
+            //     $response['success'] = false;
+            // }
         }
         else{
             foreach ($_POST as $key => $value) {
@@ -69,8 +73,10 @@ class Register extends CI_Controller {
                 $response['success'] = false;
                 $response['errormsg'] = false;
             }
-
-        }
+            $response["message"] = "ELSE ERROR";
+        }  
+        $response["errors"] = array("errors" => validation_errors());
+        echo json_encode($response);
         
     }
 
@@ -114,8 +120,8 @@ class Register extends CI_Controller {
             mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff )
         );
     }
+ 
 
-    
 	// custom method for post
 	public function _post($value){ 
         return is_array($this->input->post($value,true)) ? $this->input->post($value,true) : strip_tags($this->input->post($value,true));

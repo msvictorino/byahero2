@@ -21,10 +21,19 @@
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#contactus">Contact Us</a>
           </li>
+          <?php if($this->session->is_logged_in && $this->session->role == "admin" ): ?>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="<?= base_url() ?>admin">Administrator</a>
+            </li>
+          <?php endif; ?>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="<?= base_url().'Login/index'?>">Login</a>
-            
+            <?php if(!$this->session->is_logged_in): ?>
+            <a class="nav-link js-scroll-trigger" href="<?= base_url().'login'?>">Login</a>
+            <?php else: ?>
+            <a class="nav-link js-scroll-trigger" href="" id="btn-logout">Logout</a>
+            <?php endif; ?>
           </li>
+          
         </ul>
       </div>
     </div>

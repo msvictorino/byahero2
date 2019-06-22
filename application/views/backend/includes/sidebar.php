@@ -2,31 +2,26 @@
       <div class="sidebar-sticky">
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link active" href="#">
+            <a class="nav-link active" href="<?= base_url()?>admin">
               <span data-feather="home"></span>
               Dashboard <span class="sr-only">(current)</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="<?= base_url()?>admin/user">
               <span data-feather="file"></span>
               Users
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="<?= base_url()?>admin/package">
               <span data-feather="shopping-cart"></span>
               Packages
             </a>
           </li>
+          
           <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="users"></span>
-              Promo
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="<?= base_url()?>admin/logs">
               <span data-feather="bar-chart-2"></span>
               Logs
             </a>

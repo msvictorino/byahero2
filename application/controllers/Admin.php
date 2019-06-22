@@ -5,7 +5,16 @@ class Admin extends CI_Controller {
 
     public function __construct(){
         parent::__construct();
-      //  $this->load->model('AdminModel'); 
+        if($this->session->is_logged_in && $this->session->role == "admin"){
+            $checkData = array("uuid" => $this->session->uuid);
+            if(!($this->user->fetch("users", $checkData)))
+                $this->logout(); 
+            else         
+                $this->session->set_userdata("csrf", NULL);
+        }
+        else{
+            redirect("/");
+        } 
     }
    
     //About Us DISPLAY
@@ -17,6 +26,51 @@ class Admin extends CI_Controller {
         $this->load->view('backend/includes/header', $data);
         $this->load->view('backend/index');
         $this->load->view('backend/includes/footer');
+    }
+
+    public function user(){
+        $data["curr_path"] = $this->uri->segment(2);
+        $data["users"] = $this->user->fetch("users");
+        $data['uuid'] = $uuid = $this->uri->segment(3);
+        $csrf = $this->session->csrf;
+        if (!$this->session->has_userdata('csrf') || empty($this->session->csrf)) {
+            $csrf = bin2hex(random_bytes(32));
+            $this->session->set_userdata('csrf', $csrf); 
+        } 
+        $is_uuid = FALSE; 
+        if($uuid != ""){ 
+            $user = $this->user->fetch("users", array('uuid' => $uuid));   
+            if($user){
+                if(count($user) > 0)
+                    $is_uuid = TRUE; 
+                else 
+                    print_r("tyst"); 
+            }
+            else
+                show_404();
+        }  
+        if($is_uuid){ 
+            $user = $user[0];
+            $data["user"] = $user;
+            $data["csrf"] = $csrf;
+            $this->load->view('backend/includes/header', $data);
+            $this->load->view('backend/modules/user/user');
+            $this->load->view('backend/includes/footer');
+        }
+        else{
+            $this->load->view('backend/includes/header', $data);
+            $this->load->view('backend/modules/user/index');
+            $this->load->view('backend/includes/footer');
+        }
+        // print_r($data);
+    }
+
+    public function createCSRF(){
+        
+    }
+    public function logout(){
+        $this->session->sess_destroy();
+        redirect("/");
     }
 
 
