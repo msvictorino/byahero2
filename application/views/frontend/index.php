@@ -3,6 +3,16 @@
 .checked {
   color: orange;
 }
+
+#pribtn {
+	width:40%;
+	height:100px;
+	margin:10px;
+	border-radius:9px;
+	background-color:#FE9900;
+	color:white;
+	font-size:280%;
+}
 </style>
   <!-- Header -->
   <header class="masthead">
@@ -11,7 +21,7 @@
         <div class="intro-lead-in">Start your getaway here with us!</div>
        <center>  <img src="<?= base_url()?>img/frontend/logos/logo.png" alt="Italian Trulli"> <br>
        <div class="row">
-          <div class="col-md-5 mb-3">
+          <div class="col-md-8 mb-3">
             <select class="custom-select d-block w-100" id="country" required>
               <option value="">Choose...</option>
               <option>Baguio</option>
@@ -27,16 +37,8 @@
               <option>Ilocos</option>
             </select>
           </div>
+          
           <div class="col-md-4 mb-3">
-            <select class="custom-select d-block w-100" id="state" required>
-              <option value="">Choose...</option>
-              <option>Solo</option>
-              <option>Couple</option>
-              <option>Group</option>
-              <option>Family</option>
-            </select>
-          </div>
-          <div class="col-md-3 mb-3">
 
           <button class="btn" type="submit" style="background-color: #FE9900;"><B style="color:white">Find Tours</B></button>
 
@@ -124,7 +126,7 @@
       <div class="row">
         <div class="col-lg-12 text-center">
           <h2 class="section-heading text-uppercase">About us</h2>
-          <img class="center" src="<?= base_url().'img/logo.png'?>"">
+          <img class="center" src="<?= base_url().'img/logo.png'?>">
             <p style="align: left"> Who are we? What do we run? The world! Who run the world? GIRLS!
             Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a
              galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also
@@ -134,6 +136,24 @@
       </div>
   </div>
  
+  </section>
+
+    <!-- About -->
+    <section class="page-section" id="team">
+      <div class="container">
+          <div class="row">
+            <div class="col-lg-12 text-center">
+              <h2 class="section-heading text-uppercase">Travel Packages</h2>
+              <br><br>
+              <div class="container">
+                  <button id="pribtn" type="button" href="<?= base_url('frontend/package') ?>">Luzon</button>
+                  <button id="pribtn" type="button" >Visayas</button>
+                  <button id="pribtn">Mindanao</button>
+              </div>
+            </div>
+          </div>
+      </div>
+        
   </section>
 
   <!-- Meet the Team -->
@@ -281,7 +301,7 @@
 
         <div class="mb-3">
           <label for="email">Contact Number <span class="text-muted">(Optional)</span></label>
-          <input type="text" class="form-control" id="enumbermail" placeholder="+639**********"">
+          <input type="text" class="form-control" id="enumbermail" placeholder="+639**********">
           <div class="invalid-feedback">
             Please enter a valid email address for shipping updates.
           </div>

@@ -34,10 +34,34 @@ class Frontend extends CI_Controller {
  
     //Travel Packages DISPLAY
     public function package(){
+        $curr_path = $this->uri->segment(1); 
         $data["curr_path"] = $this->uri->segment(1);
-        $this->load->view('frontend/includes/header', $data);
-        $this->load->view('frontend/pages/package');
-        $this->load->view('frontend/includes/footer');
+        $region = $this->input->get("region");
+        $destination = $this->input->get("destination");
+        if($region != "" && $region != NULL){
+            $regions = $this->user->fetch("locations", array("region" => $region));
+            $destination = $this->user->fetch("locations", array("region" => $region, "name" => $destination)); 
+            if($destination){ 
+                $this->load->view('frontend/includes/header', $data);
+                $this->load->view('frontend/pages/package/destination');
+                $this->load->view('frontend/includes/footer');
+            }
+            elseif($regions){
+                $this->load->view('frontend/includes/header', $data);
+                $this->load->view('frontend/pages/package/package');
+                $this->load->view('frontend/includes/footer');
+            }
+            else{
+                $this->load->view('frontend/includes/header', $data);
+                $this->load->view('frontend/pages/package/no-package');
+                $this->load->view('frontend/includes/footer');
+            }
+        }
+        else{
+            $this->load->view('frontend/includes/header', $data);
+            $this->load->view('frontend/pages/package/region');
+            $this->load->view('frontend/includes/footer');
+        } 
     }
  
     //Contact Us DISPLAY
