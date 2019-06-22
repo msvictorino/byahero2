@@ -89,6 +89,16 @@
 
   <!-- <div class="jumbotron"> -->
     <div class="container">
+      <?php if($this->session->is_booking): ?>
+        <div class="row m-2">
+          <div class="col-md-12">
+            <div class="alert alert-warning text-center">
+              <h3>Please login to continue on booking</h3>
+            </div>
+          </div>
+        </div>
+      <?php endif; ?>
+
       <div class="row">
         <div class="col-lg-6 col-sm-12 mx-auto my-auto" style="padding-top: 60px">
       
@@ -115,7 +125,7 @@
               </label>
             </div>
             <button class="btn btn-lg btn-block" type="submit" style="background-color: #FE9900;"><B style="color:white">LOGIN</B></button>
-            <a href=""> Sign Up </a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="<?= base_url()?>register/index"> Sign Up </a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

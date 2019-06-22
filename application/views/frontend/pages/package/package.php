@@ -128,6 +128,18 @@ h3{
             </div>
             <div class="col-md-8 mb-3 form-inline">
                 <div class="form-group">
+                  <select class="custom-select d-block" name="year"  required>
+                    <option >Select Year</option>     
+                    <?php
+                      $currentYear = date('Y');
+                      for($i = $currentYear + 1; $i >= $currentYear; $i--){
+                        ?>
+                        <option value="<?= $i ?>"><?= $i ?></option>
+                        <?php
+
+                      }
+                    ?>
+                  </select>
                   <select class="custom-select d-block mr-2 " name="month"  required>
                     <option >Select Month</option>     
                     <?php
@@ -144,18 +156,6 @@ h3{
                     <option >Select Day</option>     
                     <?php
                       for($i = 1;$i <= 31; $i++){
-                        ?>
-                        <option value="<?= $i ?>"><?= $i ?></option>
-                        <?php
-
-                      }
-                    ?>
-                  </select>
-                  <select class="custom-select d-block" name="year"  required>
-                    <option >Select Year</option>     
-                    <?php
-                      $currentYear = date('Y');
-                      for($i = $currentYear + 1; $i >= $currentYear; $i--){
                         ?>
                         <option value="<?= $i ?>"><?= $i ?></option>
                         <?php

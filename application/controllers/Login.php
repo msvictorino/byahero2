@@ -41,6 +41,9 @@ class Login extends CI_Controller {
                     $response["message"] = "Successfully Login";
                     $response["success"] = TRUE;
                     $response["errormsg"] = FALSE;
+                    if($this->session->is_booking){
+                        $response["is_booking"] = TRUE;
+                    }
                 }
                 else{
                     $response['message'] = 'Invalid Account';
