@@ -14,7 +14,7 @@
                         <div class="card">
                             <div class="card-media">
                                 <a href="<?= base_url('package?region='.$r->region.'&destination='.$r->name) ?>">
-                                    <img width="100%" height="200px" src="<?= base_url('img/logo.png') ?>" alt="DESTINATION NAME">
+                                    <img width="100%" height="200px" src="<?= base_url('img/frontend/team/baguio_picture.jpg') ?>" alt="DESTINATION NAME">
                                 </a>
                             </div>
                             <div class="card-body">

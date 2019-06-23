@@ -18,8 +18,11 @@ var app_url = protocol + host + path;
                     console.table(response);
                     if(response.success){
                         notify(response.message, "success");
+                        if(response.is_booking)
+                            window.location.href = app_url + "booking";
+
                         setTimeout(() => {
-                            window.location.reload();// = "/";
+                            window.location.href = app_url; ///();// = "/";
                         }, 500);
                     }
                     else{
@@ -91,16 +94,24 @@ var app_url = protocol + host + path;
                         console.log(response);
                         console.table(response);
                         if(response.success){
-                            if(response.is_booking)
-                                window.location.href = app_url + "/booking";
+                            
                             notify(response.message, "success");
+                            if(response.is_booking)
+                                window.location.href = app_url + "booking";
                             setTimeout(() => {
-                                window.location.href = app_url + "/" ;//();// = "/";
+                                window.location.href = app_url ;//();// = "/";
                             }, 500);
                         }
                         else{
                             var txt = '';
-                            
+                            var errorMessages = response.messages;
+                            for (const key in errorMessages) {
+                                if (errorMessages.hasOwnProperty(key)) {
+                                    const message = errorMessages[key];
+                                    if(message != "")
+                                        showError(key, message);
+                                }
+                            }
                             notify(response.message, "error");
                         }
                     },
@@ -117,6 +128,17 @@ var app_url = protocol + host + path;
                 title: title,
                 icon: type,
             });
+        }
+
+        function showError(id, message){
+            if(message != ""){
+                $("#error-"+id).show();
+                $("#error-"+id).html(message);
+            }
+            else{
+                $("#error-"+id).show();
+                $("#error-"+id).html("");
+            }
         }
 
     });

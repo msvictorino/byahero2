@@ -28,14 +28,14 @@
                     <div class="col-md-6 mb-3">
                         <label for="firstName">First name</label>
                         <input type="text" class="form-control" id="firstName" name="first_name" placeholder="" value="" required>
-                        <div class="invalid-feedback">
+                        <div class="invalid-feedback"id="error-first_name">
                             Valid first name is required.
                         </div>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="lastName">Last name</label>
                         <input type="text" class="form-control" id="lastName" name="last_name" placeholder="" value="" required>
-                        <div class="invalid-feedback">
+                        <div class="invalid-feedback" id="error-last_name">
                             Valid last name is required.
                         </div>
                     </div>
@@ -49,13 +49,16 @@
                                 <span class="input-group-text">@</span>
                             </div>
                             <input type="text" class="form-control" id="username" name="username" placeholder="Username" value="" required>
+                            <div class="invalid-feedback"  id="error-username">
+                                Please enter a valid email address for account confirmation.
+                            </div>
                         </div>
                     </div>
 
                     <div class="col-md-6 mb-3">
                         <label for="email">Email <span class="text-muted"></span></label>
                         <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" value="">
-                        <div class="invalid-feedback">
+                        <div class="invalid-feedback"  id="error-email">
                             Please enter a valid email address for account confirmation.
                         </div>
                     </div>
@@ -63,15 +66,15 @@
                 <div class="row">
                   <div class="col-md-6 mb-3">
                     <label for="password"> Password</label>
-                    <input type="text" class="form-control" id="password" name="password" required>
-                    <div class="invalid-feedback">
+                    <input type="password" class="form-control" id="password" name="password" required>
+                    <div class="invalid-feedback" id="error-password">
                         Password is required.
                     </div>
                   </div>
                   <div class="col-md-6 mb-3">
                     <label for="rpassword">Confirm Password</label>
-                    <input type="text" class="form-control" id="rpassword" name="rpassword">
-                    <div class="invalid-feedback">
+                    <input type="password" class="form-control" id="rpassword" name="rpassword">
+                    <div class="invalid-feedback" id="error-rpassword">
                         Confirm Password is required.
                     </div>
                   </div>
@@ -81,7 +84,7 @@
                     <div class="col-md-5 mb-3">
                         <label for="birthday">Birthdate</label>
                         <input type="date" class="form-control" id="birthday" name="birthday" value="">
-                        <div class="invalid-feedback">
+                        <div class="invalid-feedback" id="error-birthday">
                             Please select a valid date.
                         </div>
                     </div>
@@ -92,8 +95,8 @@
                             <option value="single">Single</option>
                             <option value="married">Married</option>
                         </select>
-                        <div class="invalid-feedback">
-                            Please provide a valid state.
+                        <div class="invalid-feedback" id="error-marital_status">
+                            Please provide a valid marital status.
                         </div>
                     </div>
                     <div class="col-md-3 mb-3">
@@ -103,6 +106,9 @@
                             <option value="male"  >Male</option>
                             <option value="female"  >Female</option>
                         </select> 
+                        <div class="invalid-feedback" id="error-gender">
+                            Please provide a valid gender.
+                        </div>
                     </div>
                 </div>
 
@@ -110,7 +116,7 @@
                     <div class="col-md-6 mb-3">
                         <label for="contact_no">Mobile Number</label>
                         <input type="text" class="form-control" id="contact_no" name="contact_no" placeholder="eg. +639999999999" value="" required>
-                        <div class="invalid-feedback">
+                        <div class="invalid-feedback" id="error-contact_no">
                             Valid first name is required.
                         </div>
                     </div>
@@ -124,7 +130,7 @@
                 <div class="mb-3">
                     <label for="address">Address</label>
                     <input type="text" class="form-control" id="address" name="address" placeholder="1234 Main St" value="" required>
-                    <div class="invalid-feedback">
+                    <div class="invalid-feedback" id="error-address">
                         Please enter your address.
                     </div>
                 </div>
@@ -132,14 +138,14 @@
                 <div class="row">
                     <div class="col-md-5 mb-3">
                         <label for="city">City</label>
-                        <input type="text" class="form-control" id="city" name="city" placeholder="Pasig City" value="" required>
+                        <input type="text" class="form-control" id="city" name="city" placeholder="Pasig City">
                         <div class="invalid-feedback">
                             Please select a valid country.
                         </div>
                     </div> 
                     <div class="col-md-3 mb-3">
                         <label for="zip">Zip</label>
-                        <input type="text" class="form-control" id="zip" name="zip" placeholder="eg. 1900" value="" required> 
+                        <input type="text" class="form-control" id="zip" name="zip" placeholder="eg. 1900"> 
                     </div>
                 </div> 
         
