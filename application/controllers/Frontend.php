@@ -37,7 +37,7 @@ class Frontend extends CI_Controller {
         $curr_path = $this->uri->segment(1); 
         $data["curr_path"] = $this->uri->segment(1);
         $region = $this->input->get("region");
-        $destination = $this->input->get("destination");
+        $destination = $this->input->get("destination"); 
         if($region != "" && $region != NULL){
             $regions = $this->user->fetch("locations", array("region" => $region));
             
@@ -51,6 +51,8 @@ class Frontend extends CI_Controller {
                     $data["tours"] = $tours;
                     $data["packages"] = $packages;
                     if($tours){
+                        $prev_url["prev_url"] = $_SERVER['REQUEST_URI'];
+                        $this->session->set_userdata($prev_url);
                         $this->load->view('frontend/includes/header', $data);
                         $this->load->view('frontend/pages/package/package');
                         $this->load->view('frontend/includes/footer'); 
@@ -90,6 +92,14 @@ class Frontend extends CI_Controller {
         $this->load->view('frontend/includes/footer');
     }
 
+    //Profile Display
+    public function profile(){
+        $data["curr_path"] = $this->uri->segment(1);
+        $this->load->view('frontend/includes/header', $data);
+        $this->load->view('frontend/pages/profile/index');
+        $this->load->view('frontend/includes/footer');
+    }
+
     public function logout(){
         $this->session->sess_destroy();
         redirect("/");
@@ -109,7 +119,7 @@ class Frontend extends CI_Controller {
 
 
     public function savePackage(){
-        $response = array("success" => TRUE, "message" => "Redirecting to Booking Page");
+        $response = array("success" => TRUE, "message" => "Redirecting to Booking Page"); 
         $data = array(
             "tour_id" => $this->_post("tour_id"),
             "package_id" => $this->_post("package"),
@@ -117,13 +127,19 @@ class Frontend extends CI_Controller {
             "day" => $this->_post("day"),
             "month" => $this->_post("month"),
             "year" => $this->_post("year"),
-            "is_booking" => TRUE,
+            "is_booking" => TRUE, 
         );
-
+        $response["data"] = $data;
         $this->session->set_userdata($data);
         echo json_encode($response);
     }
 
+    
+    public function debug($data){
+        echo "<pre>";
+        print_r($data);
+        echo "</pre>";
+    }
     
     public function createAudit(){
         // $data = array(
