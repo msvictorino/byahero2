@@ -62,12 +62,12 @@ var app_url = protocol + host + path;
                     dataType:  "json",
                     data : formData,
                     success : function(response){
-                        console.log(response);
-                        console.table(response);
+                        // console.log(response);
+                        // console.table(response);
                         if(response.success){
                             notify(response.message, "success");
                             setTimeout(() => {
-                                window.location.href = app_url + "/booking" ;//();// = "/";
+                                window.location.href = app_url + "booking" ;//();// = "/";
                             }, 500);
                         }
                         else{
@@ -122,6 +122,109 @@ var app_url = protocol + host + path;
                 })
                 console.log(formData);
             });
+
+            $(document).on("submit","#frm-booking", function(e){
+                e.preventDefault();
+                $.ajax({
+                    url: app_url + "booking/saveBooking",
+                    dataType: "json",
+                    success:function(response){
+                        if(response.success){
+                            notify(response.message, "success");
+                            setTimeout(() => {
+                                window.location.href = app_url + "profile"; 
+                            }, 500);
+                        }
+                        else{
+                            notify(response.message, "error");
+                            setTimeout(() => {
+                                window.location.href = app_url ; 
+                            }, 500);
+                        }
+                        console.log(response);
+                    },
+                    error:function(response){
+                        console.log(response);
+                    }
+                })
+            });
+
+            $(document).on("submit", "#frm-payment", function(e){
+                e.preventDefault();
+                // var formData = $(this).serialize();
+                var formData =  new FormData(this);
+                // var d = $("#imgInp")[0].files;
+                // formData.append("img", d);
+                console.log(formData);
+                $.ajax({
+                    url: app_url + "booking/uploadPayment",
+                    type: "POST",
+                    data : formData,
+                    dataType : "json",
+                    processData: false,  // tell jQuery not to process the data
+                    contentType: false,  // tell jQuery not to set contentType
+                    cache: false,//Options to tell jQuery not to process data or worry about content-type.
+                    success: function(response){
+                        console.log(response);
+                        if(response.success){
+                            notify(response.message, "success");
+                            setTimeout(() => {
+                                window.location.reload(); 
+                            }, 1000);
+                        }
+                        else{
+                            var errorMessage = response.message;
+                            if(response.error_upload)
+                                errorMessage = response.error;
+
+                            notify(errorMessage, "error"); 
+                        }
+                    },
+                    error: function(response){
+                        console.log(response);
+                    }
+                });
+            });
+
+            function readURL(input) {
+
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    // Get Image size
+                    // var fileInput = $(this).find("#imgInp")[0],
+                    //     file = fileInput.files && fileInput.files[0];
+                    var file = input.files && input.files[0];
+                    if( file ) {
+                        var img = new Image();
+
+                        img.src = window.URL.createObjectURL( file );
+
+                        img.onload = function() {
+                            var width = img.naturalWidth,
+                                height = img.naturalHeight;
+
+                            window.URL.revokeObjectURL( img.src );
+ 
+                            reader.onload = function(e) {
+                                console.log(e);
+                                // $('#blah').attr('src', e.target.result);
+                                // $("#blah").hide();
+                                $("#imagePayment").show();
+                                $("#imagePayment").css('background-image','url('+ e.target.result + ')'); 
+                                $("#imagePayment").css('height',height + "px");
+                            }
+                            reader.readAsDataURL(input.files[0]);
+                        };
+                    }
+                    
+        
+                }
+            }
+    
+            $(document).on("change", "#imgInp",function() {
+                readURL(this);
+            });
+    
 
         function notify(title, type){
             swal({

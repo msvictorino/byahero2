@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 22, 2019 at 06:45 AM
+-- Generation Time: Jun 22, 2019 at 12:58 PM
 -- Server version: 10.1.9-MariaDB
 -- PHP Version: 5.6.15
 
@@ -74,49 +74,6 @@ INSERT INTO `audits` (`id`, `user_type`, `user_id`, `event`, `auditable_type`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cache`
---
-
-DROP TABLE IF EXISTS `cache`;
-CREATE TABLE IF NOT EXISTS `cache` (
-  `key` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `value` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `expiration` int(11) NOT NULL,
-  UNIQUE KEY `cache_key_unique` (`key`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Truncate table before insert `cache`
---
-
-TRUNCATE TABLE `cache`;
--- --------------------------------------------------------
-
---
--- Table structure for table `jobs`
---
-
-DROP TABLE IF EXISTS `jobs`;
-CREATE TABLE IF NOT EXISTS `jobs` (
-  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `queue` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `attempts` tinyint(3) UNSIGNED NOT NULL,
-  `reserved_at` int(10) UNSIGNED DEFAULT NULL,
-  `available_at` int(10) UNSIGNED NOT NULL,
-  `created_at` int(10) UNSIGNED NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `jobs_queue_index` (`queue`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Truncate table before insert `jobs`
---
-
-TRUNCATE TABLE `jobs`;
--- --------------------------------------------------------
-
---
 -- Table structure for table `locations`
 --
 
@@ -146,91 +103,6 @@ INSERT INTO `locations` (`id`, `name`, `region`, `created_at`, `updated_at`) VAL
 -- --------------------------------------------------------
 
 --
--- Table structure for table `migrations`
---
-
-DROP TABLE IF EXISTS `migrations`;
-CREATE TABLE IF NOT EXISTS `migrations` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `migration` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `batch` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Truncate table before insert `migrations`
---
-
-TRUNCATE TABLE `migrations`;
---
--- Dumping data for table `migrations`
---
-
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(1, '2014_10_12_000000_create_users_table', 1),
-(2, '2014_10_12_100000_create_password_resets_table', 1),
-(3, '2017_09_03_144628_create_permission_tables', 1),
-(4, '2017_09_11_174816_create_social_accounts_table', 1),
-(5, '2017_09_26_140332_create_cache_table', 1),
-(6, '2017_09_26_140528_create_sessions_table', 1),
-(7, '2017_09_26_140609_create_jobs_table', 1),
-(8, '2018_04_08_033256_create_password_histories_table', 1),
-(9, '2019_03_26_000344_create_audits_table', 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `model_has_permissions`
---
-
-DROP TABLE IF EXISTS `model_has_permissions`;
-CREATE TABLE IF NOT EXISTS `model_has_permissions` (
-  `permission_id` int(10) UNSIGNED NOT NULL,
-  `model_type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `model_id` bigint(20) UNSIGNED NOT NULL,
-  PRIMARY KEY (`permission_id`,`model_id`,`model_type`),
-  KEY `model_has_permissions_model_type_model_id_index` (`model_type`,`model_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Truncate table before insert `model_has_permissions`
---
-
-TRUNCATE TABLE `model_has_permissions`;
--- --------------------------------------------------------
-
---
--- Table structure for table `model_has_roles`
---
-
-DROP TABLE IF EXISTS `model_has_roles`;
-CREATE TABLE IF NOT EXISTS `model_has_roles` (
-  `role_id` int(10) UNSIGNED NOT NULL,
-  `model_type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `model_id` bigint(20) UNSIGNED NOT NULL,
-  PRIMARY KEY (`role_id`,`model_id`,`model_type`),
-  KEY `model_has_roles_model_type_model_id_index` (`model_type`,`model_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Truncate table before insert `model_has_roles`
---
-
-TRUNCATE TABLE `model_has_roles`;
---
--- Dumping data for table `model_has_roles`
---
-
-INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
-(1, 'App\\Models\\Auth\\User', 1),
-(2, 'App\\Models\\Auth\\User', 2),
-(3, 'App\\Models\\Auth\\User', 3),
-(3, 'App\\Models\\Auth\\User', 11),
-(3, 'App\\Models\\Auth\\User', 12);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `packages`
 --
 
@@ -243,13 +115,57 @@ CREATE TABLE IF NOT EXISTS `packages` (
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Truncate table before insert `packages`
 --
 
 TRUNCATE TABLE `packages`;
+--
+-- Dumping data for table `packages`
+--
+
+INSERT INTO `packages` (`id`, `tour_id`, `name`, `description`, `updated_at`, `created_at`) VALUES
+(1, 1, 'Cebu City Tour + Temple of Leah', 'HIGHLIGHTS:\r\nMagellan’s Cross\r\nBasilica Minor del Sto. Nino\r\nFort San Pedro\r\nCebu Heritage Monument\r\nYap Santiago Ancestral House\r\nFuente Osmena Circle, Capitol Building (Running Tour)\r\nTaoist Temple\r\nBuffet lunch restaurant (PLS REFER TABLE)\r\nTemple of Leah\r\n\r\nTOUR INCLUSIONS:\r\nPrivate car/van with Fuel and driver\r\nBuffet lunch/dinner\r\nDOT English Tour Guide\r\nAll Entrance fees', '2019-06-22 08:42:54', '0000-00-00 00:00:00'),
+(2, 1, 'Mactan Island Hopping (Exclusive)', 'TOUR INCLUSIONS:\r\nRound trip private transfers from Mactan Airport/Mandaue city/Cebu city accommodation to destinations and v.v\r\nFuel and driver\r\nSet lunch with 1 round drinks\r\nTour Coordinator/tour facilitator\r\nEntrance fees\r\nBoat fees\r\nIsland hopping to Nalusuan and Hilutungan\r\n\r\nEXCLUSIONS:\r\nSnorkelling Gear\r\nBread for fishfeeding\r\nOthers not mentioned', '2019-06-22 08:42:54', '0000-00-00 00:00:00'),
+(3, 1, 'Oslob Whale Shark Adventure + Tumalog Falls (Exclusive)', 'TOUR INCLUSIONS:\r\nRound trip private transfers from Mactan Airport/Mandaue City/Cebu city accommodation to destinations and v.v\r\nFuel and driver\r\nSet lunch with 1 round drinks\r\nLocal Tour Coordinator/facilitator at the activity area\r\nEntrance fees for Whaleshark ( viewing & snorkeling)\r\nEncounter with the whale shark\r\nSide trip to Tumalog falls or At Oslob Cuartel\r\nTumalog FallsEntrance fee\r\nSnorkeling mask and goggles\r\nLife vest', '2019-06-22 08:42:54', '0000-00-00 00:00:00'),
+(4, 1, 'Oslob Whale Shark Adventure + Badian Canyoneering (Exclusive)', 'Round trip private transfers from Mactan Airport/Mandaue city/Cebu city accommodation to destinations and v.v\r\nFuel and driver\r\nSet lunch with 1 round drinks\r\nTour Coordinator/Facilitator at the activity area\r\nBoat fees?All entrance fees\r\nLifevest\r\nBadian Canyoneering with gears\r\nHelmet, Lifevest, Aqua Shoes, Common Dry bag', '2019-06-22 08:42:54', '0000-00-00 00:00:00'),
+(5, 1, 'Moalboal Island Hopping (Exclusive)', 'TOUR INCLUSIONS:\r\nRound trip private transfers from Mactan Airport/Mandaue city/Cebu city accommodation to destinations and v.v\r\nFuel and driver\r\nLocal tour Guide only at the activity area\r\nBoat fees\r\nBoat man\r\nSet Lunch with 1 round of drinks\r\nLife vest\r\nSnorkeling gear\r\nIsland hopping to Pescador Island with Sardines Run\r\nWatching Sea Turtle', '2019-06-22 08:42:54', '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `packages_pax`
+--
+
+DROP TABLE IF EXISTS `packages_pax`;
+CREATE TABLE IF NOT EXISTS `packages_pax` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `package_id` int(11) NOT NULL,
+  `pax` int(11) NOT NULL,
+  `amount` double NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+--
+-- Truncate table before insert `packages_pax`
+--
+
+TRUNCATE TABLE `packages_pax`;
+--
+-- Dumping data for table `packages_pax`
+--
+
+INSERT INTO `packages_pax` (`id`, `package_id`, `pax`, `amount`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 4550, '2019-06-22 08:56:39', '0000-00-00 00:00:00'),
+(2, 1, 2, 2615, '2019-06-22 08:56:39', '0000-00-00 00:00:00'),
+(3, 1, 3, 2053, '2019-06-22 08:56:39', '0000-00-00 00:00:00'),
+(4, 1, 4, 1773, '2019-06-22 08:56:39', '0000-00-00 00:00:00'),
+(5, 1, 5, 1604, '2019-06-22 08:56:39', '0000-00-00 00:00:00');
+
 -- --------------------------------------------------------
 
 --
@@ -311,92 +227,6 @@ INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `permissions`
---
-
-DROP TABLE IF EXISTS `permissions`;
-CREATE TABLE IF NOT EXISTS `permissions` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `guard_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Truncate table before insert `permissions`
---
-
-TRUNCATE TABLE `permissions`;
---
--- Dumping data for table `permissions`
---
-
-INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
-(1, 'view backend', 'web', '2019-05-17 10:10:47', '2019-05-17 10:10:47');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `roles`
---
-
-DROP TABLE IF EXISTS `roles`;
-CREATE TABLE IF NOT EXISTS `roles` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `guard_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `roles_name_index` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Truncate table before insert `roles`
---
-
-TRUNCATE TABLE `roles`;
---
--- Dumping data for table `roles`
---
-
-INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
-(1, 'administrator', 'web', '2019-05-17 10:10:47', '2019-05-17 10:10:47'),
-(2, 'executive', 'web', '2019-05-17 10:10:47', '2019-05-17 10:10:47'),
-(3, 'user', 'web', '2019-05-17 10:10:47', '2019-05-17 10:10:47');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `role_has_permissions`
---
-
-DROP TABLE IF EXISTS `role_has_permissions`;
-CREATE TABLE IF NOT EXISTS `role_has_permissions` (
-  `permission_id` int(10) UNSIGNED NOT NULL,
-  `role_id` int(10) UNSIGNED NOT NULL,
-  PRIMARY KEY (`permission_id`,`role_id`),
-  KEY `role_has_permissions_role_id_foreign` (`role_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Truncate table before insert `role_has_permissions`
---
-
-TRUNCATE TABLE `role_has_permissions`;
---
--- Dumping data for table `role_has_permissions`
---
-
-INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
-(1, 1),
-(1, 2);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `sessions`
 --
 
@@ -419,31 +249,6 @@ TRUNCATE TABLE `sessions`;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `social_accounts`
---
-
-DROP TABLE IF EXISTS `social_accounts`;
-CREATE TABLE IF NOT EXISTS `social_accounts` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `user_id` bigint(20) UNSIGNED NOT NULL,
-  `provider` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `provider_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` text COLLATE utf8mb4_unicode_ci,
-  `avatar` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `social_accounts_user_id_foreign` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Truncate table before insert `social_accounts`
---
-
-TRUNCATE TABLE `social_accounts`;
--- --------------------------------------------------------
-
---
 -- Table structure for table `tours`
 --
 
@@ -457,13 +262,45 @@ CREATE TABLE IF NOT EXISTS `tours` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Truncate table before insert `tours`
 --
 
 TRUNCATE TABLE `tours`;
+--
+-- Dumping data for table `tours`
+--
+
+INSERT INTO `tours` (`id`, `location_id`, `name`, `pax`, `price`, `created_at`, `updated_at`) VALUES
+(1, 1, 'CEBU OPTIONAL TOURS', 5, 1604, '2019-06-22 08:40:34', '2019-06-22 08:57:24'),
+(2, 1, 'MALAPASCUA ISLAND TOUR', 5, 1352, '2019-06-22 08:40:34', '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `transactions`
+--
+
+DROP TABLE IF EXISTS `transactions`;
+CREATE TABLE IF NOT EXISTS `transactions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `tours_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `amount` double NOT NULL,
+  `pax` double NOT NULL,
+  `travel_date` date NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Truncate table before insert `transactions`
+--
+
+TRUNCATE TABLE `transactions`;
 -- --------------------------------------------------------
 
 --
@@ -509,42 +346,7 @@ INSERT INTO `users` (`id`, `uuid`, `first_name`, `last_name`, `email`, `avatar_t
 (1, 'bca04613-3677-4f6d-b065-a6280348377d', 'Mica', 'Victorino', 'admin@admin.com', 'gravatar', NULL, '$2y$10$3u6fX1hjLRtI/Nzhaj82BOA2A0ZQSQz9yMa0XGPrD3h0o5qKAwhLm', NULL, 1, '2a372fa2e2dd3510adf642b91a5fe6af', 1, 'America/New_York', '2019-05-17 10:13:11', '127.0.0.1', 0, 'WcNPlRRtnBABmmVP3aJOxKWjskoICTi8TQzCWluN5RFi4Q3p4X9f8MpmUU3T', '2019-05-17 10:10:46', '2019-05-17 10:17:01', NULL),
 (2, '9e4750a6-9962-431b-9324-e2314983f17f', 'Backend', 'User', 'executive@executive.com', 'gravatar', NULL, '$2y$10$3u6fX1hjLRtI/Nzhaj82BOA2A0ZQSQz9yMa0XGPrD3h0o5qKAwhLm', NULL, 1, 'cda5cf052a7a185a8f6679d7b32bc7c9', 1, NULL, NULL, NULL, 0, NULL, '2019-05-17 10:10:46', '2019-05-17 10:10:46', NULL),
 (3, 'd2b9eeae-4e49-4b6b-b069-ade5b66c775b', 'Default', 'User', 'user@user.com', 'gravatar', NULL, '$2y$10$3u6fX1hjLRtI/Nzhaj82BOA2A0ZQSQz9yMa0XGPrD3h0o5qKAwhLm', NULL, 1, 'f9fc6470c33cb877c544666870dc56bf', 1, NULL, NULL, NULL, 0, NULL, '2019-05-17 10:10:46', '2019-05-17 10:10:46', NULL),
-(12, '9344a531-aa6f-4c0d-bcb0-e3032e8579c8', 'John paul', 'Dala', 'jaypeedala31@gmail.com', 'gravatar', NULL, '$2y$10$3u6fX1hjLRtI/Nzhaj82BOA2A0ZQSQz9yMa0XGPrD3h0o5qKAwhLm', NULL, 1, '112b50086ef65627cb0c51daddc268b8', 0, NULL, NULL, NULL, 0, 'pbqoKtATrZPa15nl0AYCKjN3IMHahXSLkLSyoHpIzifbvv4UVvomuOCvl0ye', '2019-05-17 11:38:12', '2019-05-17 11:38:12', NULL);
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `model_has_permissions`
---
-ALTER TABLE `model_has_permissions`
-  ADD CONSTRAINT `model_has_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `model_has_roles`
---
-ALTER TABLE `model_has_roles`
-  ADD CONSTRAINT `model_has_roles_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `password_histories`
---
-ALTER TABLE `password_histories`
-  ADD CONSTRAINT `password_histories_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
-
---
--- Constraints for table `role_has_permissions`
---
-ALTER TABLE `role_has_permissions`
-  ADD CONSTRAINT `role_has_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `role_has_permissions_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `social_accounts`
---
-ALTER TABLE `social_accounts`
-  ADD CONSTRAINT `social_accounts_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+(12, '9344a531-aa6f-4c0d-bcb0-e3032e8579c8', 'John paul', 'Dala', 'jaypeedala01@gmail.com', 'gravatar', NULL, '$2y$10$3u6fX1hjLRtI/Nzhaj82BOA2A0ZQSQz9yMa0XGPrD3h0o5qKAwhLm', NULL, 1, '112b50086ef65627cb0c51daddc268b8', 0, NULL, NULL, NULL, 0, 'pbqoKtATrZPa15nl0AYCKjN3IMHahXSLkLSyoHpIzifbvv4UVvomuOCvl0ye', '2019-05-17 11:38:12', '2019-05-17 11:38:12', NULL);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

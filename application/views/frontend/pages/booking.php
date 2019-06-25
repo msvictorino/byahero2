@@ -54,8 +54,14 @@ input[type=radio].with-font:focus~label:before, input[type=checkbox].with-font:f
 </style>
 
 <div class="content">
-<div class="container">
-	 <div class="row">
+    <form id="frm-booking">
+        <div class="container">
+            <div class="row mb-3">
+                <div class="col-sm-6">
+                    <a class="btn btn-sm btn-info" href="<?= $this->session->prev_url ?>">Go back</a>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12">
                     <div class="box">
                         <h3 class="box-title">Package Tour Checkout </h3>
@@ -71,12 +77,19 @@ input[type=radio].with-font:focus~label:before, input[type=checkbox].with-font:f
                       
                     </div>
                    
-                    <button class="btn btn-lg btn-block" type="submit" style="background-color: #FE9900;"><B style="color:white">CONTINUE WITH PAYMENT</B></button>
+                    <button class="btn btn-lg btn-block" type="submit" style="background-color: #FE9900;"><B style="color:white">CONFIRM BOOKING</B></button>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-5 col-xs-12">
                   
                     <div class="widget">
                         <h4 class="widget-title">Payment Summary</h4>
+                        <div class="summary-block">
+                            <div class="summary-content">
+                                <div class="summary-head"><h5 class="summary-title"><?= $user->first_name . ' ' . $user->last_name ?></h5></div>
+                                <div class="summary-price"> 
+                                </div>
+                            </div>
+                        </div>
                         <div class="summary-block">
                             <div class="summary-content">
                                 <div class="summary-head"><h5 class="summary-title"><?= $package->name?></h5></div>
@@ -87,13 +100,25 @@ input[type=radio].with-font:focus~label:before, input[type=checkbox].with-font:f
                         </div>
                         <div class="summary-block">
                             <div class="summary-content">
+                                <div class="summary-head"><h5 class="summary-title"><?= $package_pax->pax?> pax</h5></div>
+                                <div class="summary-price">
+                                    <p class="summary-text">Php. <?= $package_pax->amount * $package_pax->pax?> </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="summary-block">
+                            <div class="summary-content">
                                <div class="summary-head"> <h5 class="summary-title">Total</h5></div>
                                 <div class="summary-price">
-                                    <p class="summary-text">Php. <?= $package_pax->amount?></p>
+                                    <p class="summary-text">Php. <?= $package_pax->amount * $package_pax->pax?></p>
                                 </div>
                             </div>
                         </div>
                     </div>
                    
-                </div>
+                    </div>
+                </div> 
             </div>
+        </div>
+    </form>
+</div>
