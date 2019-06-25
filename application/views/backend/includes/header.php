@@ -8,11 +8,13 @@
     <title>Byahero</title>
 
     <!-- Bootstrap -->
+    
     <link href="<?= base_url().'assets/css/bootstrap.min.css'?>" rel="stylesheet">
+    <link rel="stylesheet" href="<?= base_url() ?>assets/custom/backend/css/dashboard.css">
     <link rel="stylesheet" href="<?= base_url() ?>assets/vendor/css/fontawesome.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <link rel="stylesheet" href="<?= base_url() ?>assets/custom/backend/css/dashboard.css">
+    
     <!-- Scripts -->
     <script src="<?= base_url() ?>assets/vendor/js/sweetalert.js"></script>
     <script src="<?= base_url() ?>assets/vendor/js/jquery-3.3.1.slim.min.js"></script>

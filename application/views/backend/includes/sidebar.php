@@ -1,4 +1,4 @@
-    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+ <nav class="col-md-2 d-none d-md-block bg-light sidebar">
       <div class="sidebar-sticky">
         <ul class="nav flex-column">
           <li class="nav-item">
@@ -18,6 +18,21 @@
               <span data-feather="shopping-cart"></span>
               Packages
             </a>
+           
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="<?= base_url()?>admin/packagelist">
+              <span data-feather="shopping-cart"></span>
+              List
+            </a> 
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="<?= base_url()?>admin/locationlist">
+              <span data-feather="shopping-cart"></span>
+              Location List
+            </a> 
           </li>
           
           <li class="nav-item">
