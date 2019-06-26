@@ -22,11 +22,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="">Testimonials</a>
             </li>
-            <?php if($this->session->is_logged_in && $this->session->role == "admin" ): ?>
+            <!-- <?php if($this->session->is_logged_in && $this->session->role == "admin" ): ?>
                 <li class="nav-item">
                 <a class="nav-link js-scroll-trigger" href="<?= base_url() ?>admin">Administrator</a>
                 </li>
-            <?php endif; ?>
+            <?php endif; ?> -->
             
           <?php if($this->session->is_logged_in): ?> 
             <li class="nav-item dropdown">
