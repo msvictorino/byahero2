@@ -24,6 +24,14 @@ class Frontend extends CI_Controller {
         $this->load->view('frontend/includes/footer');
     }
 
+    //Testimonials DISPLAY
+    public function testimonials(){
+        $data["curr_path"] = $this->uri->segment(1);
+        $this->load->view('frontend/includes/header', $data);
+        $this->load->view('frontend/pages/testimonials/testimonials');
+        $this->load->view('frontend/includes/footer');
+    }
+
     //Travel Promo DISPLAY
     public function promo(){
         $data["curr_path"] = $this->uri->segment(1);
