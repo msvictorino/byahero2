@@ -109,9 +109,14 @@ h1 { font-size: 1.5em; margin: 10px; }
       <form class="needs-validation" novalidate>
         <div class="row">
           <div class="col-md-4 mb-3">
-                <img src="<?= base_url()?>img/feedback.jpg" class="card-img-top" alt="...">
+            <div class="card text-center" style = "border-style: dashed;">
+                    <div class="card-body">
+                        <img src="<?= base_url()?>img/feedback.jpg" class="card-img-top" alt="...">
+                        <!-- insert here kung ano picture ng package/tour ang rate nila -->
+                        <p class="card-text mt-2"> Batanes Tour </p>
+                    </div>
+            </div>
           </div>
-          
           <div class="col-md-6 mb-3">
             <label for="lastName" style = "display:block;">Kindly rate us, 5-highest and 1-lowest</label> 
             <fieldset class="rating">

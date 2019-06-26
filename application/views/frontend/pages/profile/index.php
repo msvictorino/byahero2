@@ -317,6 +317,7 @@
                                                                             echo '<span class="badge badge-warning">Processing</span>';
                                                                         elseif($t->payment_status == 1 && $t->is_review == 0)
                                                                             echo ' <a class = "btn btn-warning btn-sm" style = "color:white;"a> <i class = "fa fa-comment" style = "color:white;"> </i> Rate </a>';
+                                                                        // yung ginawa ko na user_after na view ayun yung kapag tapos na sya sa tour then ratings connected here kapag for review activity
                                                                         elseif($t->payment_status == 1 && $t->is_review == 1)
                                                                             echo '<span class="badge badge-success">Done</span>';
                                                                         ?>
