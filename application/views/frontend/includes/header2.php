@@ -12,6 +12,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="<?= base_url().'assets/css/bootstrap.min.css'?>" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- Custom fonts for this template -->
     <link href="<?= base_url() ?>assets/vendor/fonts/css/all.min.css" rel="stylesheet" type="text/css">

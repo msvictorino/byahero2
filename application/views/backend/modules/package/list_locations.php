@@ -22,7 +22,7 @@
     </form>
     </div>
     <div class = col-md-5>
-    <a href = "<?= base_url()?>admin/luzon" class="btn btn-info my-3 pull-right" style = "color:white;"> <i class = "fa fa-plus"> </i> Add Location</a>
+    <a href = "<?= base_url()?>admin/location_create" class="btn btn-info my-3 pull-right" style = "color:white;"> <i class = "fa fa-plus"> </i> Add Location</a>
     </div>
     </div>
     <section>
@@ -80,7 +80,7 @@
     </form>
     </div>
     <div class = col-md-5>
-    <button class="btn btn-warning my-3 pull-right" style = "color:white;"> <i class = "fa fa-plus"> </i> Add Location</button>
+    <a href = "<?= base_url()?>admin/location_create" class="btn btn-warning my-3 pull-right" style = "color:white;"> <i class = "fa fa-plus"> </i> Add Location</a>
     </div>
     </div>
     
@@ -141,7 +141,7 @@
     </form>
     </div>
     <div class = col-md-5>
-    <button class="btn btn-warning my-3 pull-right" type="submit" style = "color:white;"> <i class = "fa fa-plus"> </i> Add Location</button>
+    <a href = "<?= base_url()?>admin/location_create" class="btn btn-success my-3 pull-right" style = "color:white;"> <i class = "fa fa-plus"> </i> Add Location</a>
     </div>
     </div>
     

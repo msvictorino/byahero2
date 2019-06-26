@@ -65,6 +65,29 @@ class User_model extends CI_Model {
         return ($query->num_rows() > 0) ? $query->result() : false;
     }
 
+    function fetchTransactionTour($where){
+        $this->db->select("transactions.*, tours.name, tours.location_id, packages.name as package_name");
+        $this->db->from("transactions");
+        $this->db->join("tours","transactions.tours_id = tours.id");
+        $this->db->join("packages","transactions.packages_id = packages.id");
+        $this->db->where("transactions.user_id" , $where["user_id"]); 
+        
+        $query = $this->db->get();
+        return ($query->num_rows() > 0) ? $query->result() : false;
+    }
+
+    function fetchTransactionTourPayment($where){
+        $this->db->select("transactions.*, tours.name, tours.location_id, packages.name as package_name");
+        $this->db->from("transactions");
+        $this->db->join("tours","transactions.tours_id = tours.id");
+        $this->db->join("packages","transactions.packages_id = packages.id");
+        $this->db->where("transactions.user_id" , $where["user_id"]); 
+        $this->db->where("transactions.payment_status" , 0); 
+        
+        $query = $this->db->get();
+        return ($query->num_rows() > 0) ? $query->result() : false;
+    }
+
     
 
 

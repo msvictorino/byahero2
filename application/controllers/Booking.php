@@ -73,7 +73,8 @@ class Booking extends CI_Controller {
         $config['file_name'] = "byahero-payment-". date("Y-m-d"). '_' . time();
         $this->load->library('upload', $config);
         $this->upload->initialize($config);
-        
+        // echo json_encode($_POST);
+        // exit();
         $response['error_upload'] = FALSE;
         $response['success'] = FALSE;
         if (!$this->upload->do_upload('imgInp')) {
@@ -86,7 +87,7 @@ class Booking extends CI_Controller {
             $image = $this->upload->data('file_name');
             $data['upload_path'] = $image;
             $response["data"] = $data; 
-            $this->user->update('transactions', $data, array('id' => 1));
+            $this->user->update('transactions', $data, array('id' => $this->_post("transaction")));
             $response['success'] = TRUE;
             $response['message'] = "Payment Uploaded";  
         }
@@ -97,6 +98,16 @@ class Booking extends CI_Controller {
 
     }
 
+
+	// custom method for post
+	public function _post($value){ 
+        return is_array($this->input->post($value,true)) ? $this->input->post($value,true) : strip_tags($this->input->post($value,true));
+	}
+
+	// costum method for $this->form_validation->set_rules();
+    public function validate($param1,$param2,$param3) {
+        return $this->form_validation->set_rules($param1,$param2,$param3);
+    } 
 
     public function debug($data){
         echo "<pre>";

@@ -71,6 +71,82 @@ $(document).ready(function(){
             }
         })
     });
+
+    function readURL(input) {
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            // Get Image size
+            // var fileInput = $(this).find("#imgInp")[0],
+            //     file = fileInput.files && fileInput.files[0];
+            var file = input.files && input.files[0];
+            if( file ) {
+                var img = new Image();
+
+                img.src = window.URL.createObjectURL( file );
+
+                img.onload = function() {
+                    var width = img.naturalWidth,
+                        height = img.naturalHeight;
+
+                    window.URL.revokeObjectURL( img.src );
+
+                    reader.onload = function(e) {
+                        console.log(e);
+                        // $('#blah').attr('src', e.target.result);
+                        // $("#blah").hide();
+                        $("#imagePayment").show();
+                        $("#imagePayment").css('background-image','url('+ e.target.result + ')'); 
+                        $("#imagePayment").css('height',"350px");
+                        $("#imagePayment").css('width',"350px");
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                };
+            }
+            
+
+        }
+    }
+
+    $(document).on("change", "#imgInp",function() {
+        readURL(this);
+    });
+
+    $(document).on("submit", "#frm-location", function(e){
+        e.preventDefault();
+        // var formData = $(this).serialize();
+        var formData =  new FormData(this);
+        // var d = $("#imgInp")[0].files;
+        // formData.append("img", d); 
+        $.ajax({
+            url: app_url + "backend/createLocation",
+            type: "POST",
+            data : formData,
+            dataType : "json",
+            processData: false,  // tell jQuery not to process the data
+            contentType: false,  // tell jQuery not to set contentType
+            cache: false,//Options to tell jQuery not to process data or worry about content-type.
+            success: function(response){
+                console.log(response);
+                if(response.success){
+                    notify(response.message, "success");
+                    setTimeout(() => {
+                        window.location.reload(); 
+                    }, 1000);
+                }
+                else{
+                    var errorMessage = response.message;
+                    if(response.error_upload)
+                        errorMessage = response.error;
+
+                    notify(errorMessage, "error"); 
+                }
+            },
+            error: function(response){
+                console.log(response);
+            }
+        });
+    });
     
     load_user_data(page);
 

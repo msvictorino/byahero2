@@ -167,6 +167,73 @@ class Backend extends CI_Controller {
         // $data 
     }
 
+    public function createLocation(){
+        $config['upload_path'] = './uploads/locations/';
+        $config['allowed_types'] = 'gif|jpg|png';
+        $config['max_size'] = 15000;
+        $config['max_width'] = 10000;
+        $config['max_height'] = 10000;
+        $config['file_name'] = "byahero-locations-". date("Y-m-d"). '_' . time();
+        $this->load->library('upload', $config);
+        $this->upload->initialize($config);
+        $this->validate("name","Name", "required|strip_tags|trim|xss_clean");
+        $this->validate("region","Region", "required|strip_tags|trim|xss_clean");
+        
+        // echo json_encode($_POST);
+        // exit();
+        $response['error_upload'] = FALSE;
+        $response['success'] = FALSE;
+        if($this->form_validation->run()){
+            if (!$this->upload->do_upload('imgInp')) {
+                $response['error'] = strip_tags($this->upload->display_errors());
+                $response['error_upload'] = TRUE;
+                $response['success'] = FALSE;
+            } 
+            else{
+                
+                $image = $this->upload->data('file_name');
+                $data = array(
+                    "name" => $this->_post("name"),
+                    "region" => $this->_post("region"),
+                    "description" => $this->_post("description"),
+                    "upload_path" => $image,
+                );
+                $response["data"] = $data;
+                if($this->admin->insert("locations", $data)){
+
+                    $response['success'] = TRUE;
+                    $response['message'] = "Payment Uploaded";  
+                } 
+                else {
+                    
+                    $response['success'] = FALSE;
+                    $response['message'] = "An error occurred.";   
+                }
+            }
+        }
+        else{
+            foreach ($_POST as $key => $value) {
+                $response['messages'][$key] = form_error($key);
+                $response['success'] = false;
+                $response['errormsg'] = false;
+            }
+        }
+        echo json_encode($response);
+
+    }
+
+    public function createTour(){
+
+    }
+
+    public function createPackage(){
+
+    }
+
+    public function createPackagePax(){
+
+    }
+
     public function createAudit(){
         // $data = array(
         //     "user_type" =>

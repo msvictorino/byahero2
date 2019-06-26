@@ -10,6 +10,7 @@ class Frontend extends CI_Controller {
     //About Us DISPLAY
     public function index(){
         $data["curr_path"] = $this->uri->segment(1);
+        $data["user"] = $this->session->user;
         $this->load->view('frontend/includes/header2', $data);
         $this->load->view('frontend/includes/navbar2');
         $this->load->view('frontend/index');
@@ -104,7 +105,30 @@ class Frontend extends CI_Controller {
 
     //Profile Display
     public function profile(){
+        if($this->session->is_logged_in){
+            $checkData = array("uuid" => $this->session->uuid);
+            if(!($this->user->fetch("users", $checkData)))
+                $this->logout(); 
+            else         
+                $this->session->set_userdata("csrf", NULL);
+        }
+        else{
+            redirect("/");
+        }  
         $data["curr_path"] = $this->uri->segment(1);
+        $user = $this->session->user;
+        $transactions = $this->user->fetchTransactionTour(array("user_id" => $user->id));
+        $paymentTransactions = $this->user->fetchTransactionTourPayment(array("user_id" => $user->id));
+        // $this->debug($transactions);
+        // $transactions = $this->user->fetch("transactions", array("user_id" => $this->session->user->id ));
+        // $tours = array();
+        // foreach ($transactions as $t) {
+        //     $tour = $this->user->fetch("tours")
+        // }
+        $data["transactions"] = $transactions;
+        $data["paymentTransactions"] = $paymentTransactions;
+        $data["user"] = $user;
+
         $this->load->view('frontend/includes/header', $data);
         $this->load->view('frontend/pages/profile/index');
         $this->load->view('frontend/includes/footer');

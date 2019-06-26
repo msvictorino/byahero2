@@ -212,6 +212,7 @@ var app_url = protocol + host + path;
                                 $("#imagePayment").show();
                                 $("#imagePayment").css('background-image','url('+ e.target.result + ')'); 
                                 $("#imagePayment").css('height',height + "px");
+                                $("#imagePayment").css('width',"100%");
                             }
                             reader.readAsDataURL(input.files[0]);
                         };

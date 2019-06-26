@@ -3,8 +3,7 @@
 #imagePayment {
 	background: #ccc;
 	background-position: center center;
-	background-size: cover; 
-    height: 400px;
+	background-size: cover;  
     border: 1px solid #bbb;
     display:none;
 }
@@ -111,8 +110,7 @@
 </style>
 
 
-    <div class="container emp-profile">
-            <form method="post">
+    <div class="container emp-profile"> 
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
@@ -125,8 +123,8 @@
                     </div>
                     <div class="col-md-6">
                         <div class="profile-head">
-                                    <h4> Coleen Santiano </h4>
-                                    <h6> coleeng</h6>
+                                    <h4> <?= $user->first_name . ' ' . $user->last_name ?> </h4>
+                                    <h6> username : <?= $user->username != "" ? $user->username : 'Username Not Set' ?></h6>
                                     <p class="proile-rating"> Your recent activity: Booked Reservation (Mactan Tour) on June 2,2019</p>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
@@ -152,13 +150,12 @@
                             <i class = "fa fa-user fa-sm"> </i> <span>About</span> 
                             <div class ="row">
                                 <div class = "col-md-7"> 
-                                    <p> Coleen Santiano </p>
-                                    <p> Coleeng</p>
-                                    <p> coleensantiano@me</p>
-                                    <p> 03-30-98</p>
-                                    <p> Single</p>
-                                    <p> Femaile</p>
-                                    <p> +639123456789</p>
+                                    <p> <?= $user->first_name . ' ' . $user->last_name ?> </p>
+                                    <p> <?= $user->username != "" ? $user->username : 'Username Not Set' ?></p>
+                                    <p> <?= $user->email != "" ? $user->email : 'Email Not Set' ?></p>
+                                    <p> <?= $user->birthday != NULL ? date("Y-m-d", strtotime($user->birthday) ) : 'Birthday Not Set' ?></p>
+                                    <p> <?= $user->marital_status != "" ? $user->marital_status : 'Marital Not Set' ?></p>
+                                    <p> <?= $user->gender != "" ? $user->gender : 'Gender Not Set' ?></p> 
                                 </div>
                                 
                             </div>
@@ -172,7 +169,7 @@
                                                 <label>Address</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>Block 9 Lot 2 Sugartowne Batasan Hills</p>
+                                                <p><?= $user->address != "" ? $user->address : 'Address Not Set' ?></p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -180,7 +177,7 @@
                                                 <label>City</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>Quezon City</p>
+                                                <p><?= $user->city != "" ? $user->city : 'City Not Set' ?></p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -188,19 +185,21 @@
                                                 <label>Zip Code</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>1126</p>
+                                                <p><?= $user->zip != "" ? $user->zip : 'Zip Code Not Set' ?></p>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Telephone</label>
+                                                <label>Phone Number</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>123 456 7890</p>
+                                                <p><?= $user->contact_no != "" ? $user->contact_no : 'Phone No. Not Set' ?></p>
                                             </div>
                                         </div>
                             </div>
                             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                <div class="container-fluid">
+                                    <form id="frm-payment" enctype="multipart/form-data"> 
                                         <div class="row"> 
                                             <div class="form-group" style = "margin-bottom:0px;">
                                                     <div class = "col-sm-12 col-md-12"> 
@@ -208,111 +207,152 @@
                                                     </div>            
                                             </div>
                                         </div>
+                                        <?php
+                                            $noData = false;
+                                            if($paymentTransactions){
+                                                if(sizeof($paymentTransactions) > 0){
+                                                    ?>
 
                                         <div class="row mb-3"> 
-                                                    <div class = "col-sm-6 col-md-3"> 
-                                                         <p style = "margin-bottom:0px;"> Tour: </p> 
-                                                         <p style = "margin-bottom:5px;"> Package: </p> 
-                                                    </div>   
-
-                                                    <div class = "col-sm-6 col-md-6"> 
-                                                         <p style = "color: black; margin-bottom:0px;"> Insert Name </p> 
-                                                         <p style = "color: black; margin-bottom:5px;"> Insert Name </p> 
-                                                    </div>
-                                                    
-                                        </div>
-
-                                            <div class = "row">
-                                             <form id = "frm-payment" enctype = "multipart/form-data"> 
-                                                <div class="col-sm-12 col-md-6 mt-1"> 
-                                                    <div class="form-group">
-                                                        <input type="file" name="imgInp" id="imgInp">
-                                                    </div>
+                                            <div class = "col-sm-12 col-md-12"> 
+                                                <div class="form-group">
+                                                    <select name="transaction" id="" class="form-control">
+                                                        <?php 
+                                                            foreach($paymentTransactions as $t){
+                                                                ?>
+                                                            <option value="<?= $t->id ?>"><?= 'Tour Name: ' . $t->name . ' | Package Name : ' . $t->package_name .' | Date: ' . $t->travel_date ?></option>
+                                                                <?php
+                                                            }
+                                                        ?>
+                                                    </select>
                                                 </div>
-
-                                                <div class ="col-sm-12 col-md-6"> 
-                                                    <div class="form-group">
-                                                        <button type="submit" class="btn btn-success" style = "width:100px">Upload</button>
-                                                    </div>
-                                                </div>
+                                            </div>
                                         </div>
+                                                    <?php
+                                                } else $noData = true;
+                                            } else $noData = true;
+                                        ?> 
+                                        <?php if(!$noData): ?>
+                                        <div class = "row">
+                                            <div class="col-sm-12 col-md-6 mt-1"> 
+                                                <div class="form-group">
+                                                    <input type="file" name="imgInp" id="imgInp">
+                                                </div>
+                                            </div>
 
-                                        <div class="row">
-                                            <div class="col-sm-12 col-md-9">             
-                                                <div id="imagePayment">
-                                                <p class = "mb-2"style = "color:black;"> Preview Uploaded Picture </p>
-                                                    <div class="card text-center" style = "border-style: dashed;">
-                                                        <div class="card-body">
-                                                            <img src="..." class="card-img-top" alt="...">
-                                                        </div>
-                                                    </div>
+                                            <div class ="col-sm-12 col-md-6"> 
+                                                <div class="form-group">
+                                                    <button type="submit" class="btn btn-success" >Upload</button>
                                                 </div>
                                             </div>
                                         </div>
 
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-12">             
+                                                <p class = "mb-2"style = "color:black;"> Preview Uploaded Picture </p>
+                                                <div id="imagePayment"></div>
+                                            </div>
+                                        </div>
+                                        <?php else: ?>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="alert alert-warning">
+                                                    No Pending Payments Available
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <?php endif; ?>
 
                                     </form>
                                 </div>
+                            </div>
 
 
                              <div class="tab-pane fade" id="history" role="tabpanel" aria-labelledby="profile-tab">
-                                        <div class="row"> 
-                                                    <div class = "col-sm-12 col-md-12"> 
+                                <?php
+                                    $noData = false;
+                                    if($transactions){
+                                        if(sizeof($transactions) > 0){
+                                            ?>
+                                            <div class="row"> 
+                                                <div class = "col-sm-12 col-md-12"> 
                                                     <div class="table-responsive">
                                                         <table class = "table table-striped table-sm"> 
                                                             <thead> 
                                                                 <tr> 
-                                                                      
-                                                                    <th> Package </th>
+                                                                        
+                                                                    <th>Tour </th>
+                                                                    <th>Package</th>
                                                                     <th>Date</th>   
-                                                                    <th> Activity </th>
+                                                                    <th>Activity </th>
                                                                     <th>Actions</th> 
                                                                 </tr>
                                                             </thead>
 
-                                                            <tbody>
+                                                            <tbody> 
+                                                            <?php
+                                                                foreach($transactions as $t){
+                                                            ?>
                                                                 <tr>
-                                                                   
-                                                                    <td> Mactan Island Hopping</td>
-                                                                    <td> 06/21/29</td>
-                                                                    <td> For review</td>
-                                                                    <td> <a class = "btn btn-primary btn-sm"> <i class = "fa fa-eye" style = "color:white;"> </i>  </a>
-                                                                            <a class = "btn btn-warning btn-sm" style = "color:white;"a> <i class = "fa fa-comment" style = "color:white;"> </i> Rate this tour </a>
+                                                                    <td><?= $t->name ?></td>
+                                                                    <td><?= $t->package_name ?></td>
+                                                                    <td><?= date("Y-m-d", strtotime($t->travel_date)) ?></td>
+                                                                    <td>
+                                                                        <?php
+                                                                        if($t->upload_path == "" || $t->upload_path == NULL)// && $t->payment_status == 0 && $t->is_review == 0)
+                                                                            echo '<span class="badge badge-info">For Upload</span>';
+                                                                        else if($t->upload_path != "" || $t->upload_path != NULL)// == 1 && $t->is_review == 0)
+                                                                            echo '<span class="badge badge-warning">For Proofing</span>';
+                                                                        elseif($t->payment_status == 1 && $t->is_review == 0)
+                                                                            echo '<span class="badge badge-warning">For Review</span>';
+                                                                        elseif($t->payment_status == 1 && $t->is_review == 1)
+                                                                            echo '<span class="badge badge-success">Done</span>';
+                                                                        ?>
                                                                     </td>
-                                                                    <!-- If na-rate nya na mawawala na ung button na upload payment magiging katulad nung nasa pinakadulo na row -->
-                                                                </tr>
-
-                                                                <tr> 
-                                                                    <td> North and South Batan Tour</td>
-                                                                    <td> 06/21/29</td>
-                                                                    <td> Upload payment</td>
-                                                                    <td> <a class = "btn btn-primary btn-sm"> <i class = "fa fa-eye" style = "color:white;"> </i>  </a>
-                                                                            <a class = "btn btn-success btn-sm" style = "color:white;"a> <i class = "fa fa-upload" style = "color:white;"> </i> Upload Payment </a>
-                                                                    </td>
-                                                                    <!-- If na-upload nya na mawawala na ung button na upload payment magiging katulad nung nasa baba -->
-                                                                </tr>
-
-                                                                <tr> 
-                                                                    <td> Bohol Countryside Tour</td>
-                                                                    <td> 06/21/29</td>
-                                                                    <td> Done</td>
-                                                                    <td> <a class = "btn btn-primary btn-sm"> <i class = "fa fa-eye" style = "color:white;"> </i>  </a>
+                                                                    <td>
+                                                                        <?php
+                                                                        if($t->upload_path == "" || $t->upload_path == NULL)// && $t->payment_status == 0 && $t->is_review == 0)
+                                                                            echo ' <a class = "btn btn-success btn-sm" href="'. base_url('profile#profile'). '" style = "color:white;"a> <i class = "fa fa-upload" style = "color:white;"> </i>  </a>';
+                                                                        else if($t->upload_path != "" || $t->upload_path != NULL)// == 1 && $t->is_review == 0)
+                                                                            echo '<span class="badge badge-warning">Processing</span>';
+                                                                        elseif($t->payment_status == 1 && $t->is_review == 0)
+                                                                            echo ' <a class = "btn btn-warning btn-sm" style = "color:white;"a> <i class = "fa fa-comment" style = "color:white;"> </i> Rate </a>';
+                                                                        elseif($t->payment_status == 1 && $t->is_review == 1)
+                                                                            echo '<span class="badge badge-success">Done</span>';
+                                                                        ?>
                                                                     </td>
                                                                 </tr>
-
+                                                            <?php
+                                                                }
+                                                            ?>
                                                             <tbody>
 
                                                         </table>
                                                     
                                                     </div>
-                                                    
+                                                        
                                                     <nav aria-label="Page navigation example" id="pagination_link">
 
                                                     </nav>  
-                                                    </div>
-                                                        
+                                                        </div>
+                                                            
+                                                </div>
                                             </div>
+                                <?php
+                                        }
+                                        else $noData = true;
+                                    }
+                                    else $noData = true;
+                                    if($noData):
+                                ?>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="alert alert-warning">
+                                            No Data Available
                                         </div>
+                                    </div>
+                                </div>
+                                    <?php endif; ?>
                                             
                                 
                              </div>
@@ -323,8 +363,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </form>           
+                </div>   
         </div>
     
    
