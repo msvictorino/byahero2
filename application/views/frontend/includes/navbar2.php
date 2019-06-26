@@ -26,12 +26,18 @@
               <a class="nav-link js-scroll-trigger" href="<?= base_url() ?>admin">Administrator</a>
             </li>
           <?php endif; ?>
-          <li class="nav-item">
+          
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class = "fa fa-user-circle"> </i> Insert Name Here</a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="text-capitalize dropdown-item" href="<?= base_url() ?>frontend/profile">Profile</a>
             <?php if(!$this->session->is_logged_in): ?>
-            <a class="nav-link js-scroll-trigger" href="<?= base_url().'login'?>">Login</a>
+            <a class="text-capitalize dropdown-item" href="<?= base_url().'login'?>">Login</a>
             <?php else: ?>
-            <a class="nav-link js-scroll-trigger" href="" id="btn-logout">Logout</a>
+            <a class="text-capitalize dropdown-item" href="" id="btn-logout">Logout</a>
             <?php endif; ?>
+            </a>
+          </div>
           </li>
           
         </ul>

@@ -1,8 +1,8 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-sm-12">
-            <h3>Destionation Selection </h3> <br>
+        <div class="col-sm-12 mt-4">
+            <h3 class="">Destionation Selection </h3> <br>
         </div>
     </div>
     <div class="row">
@@ -11,16 +11,16 @@
                 foreach($regions as $r){
                     ?>
                     <div class="col-sm-12 col-md-6 col-lg-4">
-                        <div class="card">
+                        <div class="card text-center">
                             <div class="card-media">
                                 <a href="<?= base_url('package?region='.$r->region.'&destination='.$r->name) ?>">
                                     <img width="100%" height="200px" src="<?= base_url('img/frontend/team/baguio_picture.jpg') ?>" alt="DESTINATION NAME">
                                 </a>
                             </div>
                             <div class="card-body">
-                                <h3 class="card-title text-center text-capitalize">
+                                <h4 class="card-title text-capitalize pt-1">
                                     <?= $r->name ?> Tour
-                                </h3>
+                                </h4>
                             </div>
                         </div>
                     </div>

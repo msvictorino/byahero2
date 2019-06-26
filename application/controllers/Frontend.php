@@ -31,6 +31,8 @@ class Frontend extends CI_Controller {
         $this->load->view('frontend/pages/promo');
         $this->load->view('frontend/includes/footer');
     }
+
+    
  
     //Travel Packages DISPLAY
     public function package(){

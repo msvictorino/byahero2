@@ -83,7 +83,7 @@ class Admin extends CI_Controller {
         $this->load->view('backend/includes/footer');
     }
 
-    public function packagelist(){
+    public function tourslist(){
         // echo password_hash("secret", PASSWORD_DEFAULT);
 #        $2y$10$3u6fX1hjLRtI/Nzhaj82BOA2A0ZQSQz9yMa0XGPrD3h0o5qKAwhLm
         // echo password_verify("secret", "$2y$10$3u6fX1hjLRtI/Nzhaj82BOA2A0ZQSQz9yMa0XGPrD3h0o5qKAwhLm");
@@ -100,6 +100,46 @@ class Admin extends CI_Controller {
         $data["curr_path"] = $this->uri->segment(1);
         $this->load->view('backend/includes/header', $data);
         $this->load->view('backend/modules/package/list_locations');
+        $this->load->view('backend/includes/footer');
+    }
+
+    public function luzon(){
+        // echo password_hash("secret", PASSWORD_DEFAULT);
+#        $2y$10$3u6fX1hjLRtI/Nzhaj82BOA2A0ZQSQz9yMa0XGPrD3h0o5qKAwhLm
+        // echo password_verify("secret", "$2y$10$3u6fX1hjLRtI/Nzhaj82BOA2A0ZQSQz9yMa0XGPrD3h0o5qKAwhLm");
+        $data["curr_path"] = $this->uri->segment(1);
+        $this->load->view('backend/includes/header', $data);
+        $this->load->view('backend/modules/package/location_luzon');
+        $this->load->view('backend/includes/footer');
+    }
+
+    public function tour_create(){
+        // echo password_hash("secret", PASSWORD_DEFAULT);
+#        $2y$10$3u6fX1hjLRtI/Nzhaj82BOA2A0ZQSQz9yMa0XGPrD3h0o5qKAwhLm
+        // echo password_verify("secret", "$2y$10$3u6fX1hjLRtI/Nzhaj82BOA2A0ZQSQz9yMa0XGPrD3h0o5qKAwhLm");
+        $data["curr_path"] = $this->uri->segment(1);
+        $this->load->view('backend/includes/header', $data);
+        $this->load->view('backend/modules/package/create_tour');
+        $this->load->view('backend/includes/footer');
+    }
+
+    public function package_create(){
+        // echo password_hash("secret", PASSWORD_DEFAULT);
+#        $2y$10$3u6fX1hjLRtI/Nzhaj82BOA2A0ZQSQz9yMa0XGPrD3h0o5qKAwhLm
+        // echo password_verify("secret", "$2y$10$3u6fX1hjLRtI/Nzhaj82BOA2A0ZQSQz9yMa0XGPrD3h0o5qKAwhLm");
+        $data["curr_path"] = $this->uri->segment(1);
+        $this->load->view('backend/includes/header', $data);
+        $this->load->view('backend/modules/package/create_packages');
+        $this->load->view('backend/includes/footer');
+    }
+
+    public function package_create_price(){
+        // echo password_hash("secret", PASSWORD_DEFAULT);
+#        $2y$10$3u6fX1hjLRtI/Nzhaj82BOA2A0ZQSQz9yMa0XGPrD3h0o5qKAwhLm
+        // echo password_verify("secret", "$2y$10$3u6fX1hjLRtI/Nzhaj82BOA2A0ZQSQz9yMa0XGPrD3h0o5qKAwhLm");
+        $data["curr_path"] = $this->uri->segment(1);
+        $this->load->view('backend/includes/header', $data);
+        $this->load->view('backend/modules/package/create_packages2');
         $this->load->view('backend/includes/footer');
     }
 

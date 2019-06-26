@@ -11,7 +11,7 @@
     </form>
     </div>
     <div class = col-md-5>
-    <button class="btn btn-warning my-3 pull-right" type="submit"> <i class = "fa fa-plus"> </i> Add Package</button>
+    <a href = "<?= base_url()?>admin/tour_create" class="btn btn-info my-3 pull-right" style = "color:white;"> <i class = "fa fa-plus"> </i> Add Tour</a>
     </div>
     </div>
     <section>
@@ -19,30 +19,25 @@
         <div class="table-responsive">
             <table class = "table table-striped table-sm"> 
                 <thead> 
-                    <tr> 
-                        <th>Tour ID</th>   
+                    <tr>   
                         <th>Tour Name</th>   
-                        <th>Tour Location</th>   
-                        <th> Created Date </th>
-                        <th> End Date </th>
-                        <th># of reserved pax</th> 
+                        <th>Location</th>   
+                        <th>Region</th> 
                         <th>Actions</th> 
                     </tr>
                 </thead>
 
                 <tbody>
                     <tr>
-                        <td> 12312 </td>
-                        <td> Mactan Stay</td>
-                        <td> Cebu</td>
-                        <td> 08/12/2019 </td>
-                        <td> 08/21/2019 </td>
-                        <td> 13</td>
+                        <td> BANAUE-SAGADA OPTIONAL TOURS </td>
+                        <td> BANAUE-SAGADA</td>
+                        <td> Luzon </td>
                         <td> <a class = "btn btn-primary btn-sm"> <i class = "fa fa-eye" style = "color:white;"> </i>  </a>
-                                <a class = "btn btn-warning btn-sm"> <i class = "fa fa-edit" style = "color:white;"> </i>  </a>
-                                <a class = "btn btn-danger btn-sm"> <i class = "fa fa-trash-o" style = "color:white;"> </i>  </a>
+                             <a class = "btn btn-danger btn-sm"> <i class = "fa fa-trash-o" style = "color:white;"> </i>  </a>
+                             <a class = "btn btn-warning btn-sm"style = "color:white;" href = "<?= base_url()?>admin/package_create"> <i class = "fa fa-edit" style = "color:white;"> </i> Create a package </a>
                         </td>
                     </tr>
+
                 <tbody>
 
             </table>

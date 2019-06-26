@@ -22,16 +22,16 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="<?= base_url()?>admin/packagelist">
+            <a class="nav-link" href="<?= base_url()?>admin/locationlist">
               <span data-feather="shopping-cart"></span>
-              List
+              Location
             </a> 
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="<?= base_url()?>admin/locationlist">
+            <a class="nav-link" href="<?= base_url()?>admin/tourslist">
               <span data-feather="shopping-cart"></span>
-              Location List
+              Tours
             </a> 
           </li>
           
