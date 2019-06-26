@@ -13,26 +13,26 @@
               Users
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="<?= base_url()?>admin/package">
-              <span data-feather="shopping-cart"></span>
-              Packages
-            </a>
-           
-          </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="<?= base_url()?>admin/locationlist">
+            <a class="nav-link" href="<?= base_url()?>admin/locations">
               <span data-feather="shopping-cart"></span>
               Location
             </a> 
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="<?= base_url()?>admin/tourslist">
+            <a class="nav-link" href="<?= base_url()?>admin/tours">
               <span data-feather="shopping-cart"></span>
               Tours
             </a> 
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?= base_url()?>admin/packages">
+              <span data-feather="shopping-cart"></span>
+              Packages
+            </a>
+           
           </li>
           
           <li class="nav-item">
