@@ -11,6 +11,7 @@ $(document).ready(function(){
     var url_user = app_url + "backend/getUsers/";
     var url_tour = app_url + "backend/getTours/";
     var url_package = app_url + "backend/getPackages/";
+    var url_testimonial = app_url + "backend/getTestimonials/";
     function load_user_data(page, search = null)
     {
         var url = url_user + page + (search ? "?search="+search : '');
@@ -87,6 +88,33 @@ $(document).ready(function(){
             }
         });
     }
+
+    
+    function load_testimonial_data(page, search = null)
+    {
+        var url = url_testimonial + page + (search ? "?search="+search : '');
+        $.ajax({
+            url: url,
+            method:"GET",
+            dataType:"json",
+            success:function(response){
+                if(response.success){
+                    $('#testimonial_table').html(response.userTable);
+                    $('#pagination_link_testimonial').html(response.pagination_link);
+                }
+                else{
+                    $('#testimonial_table').html(response.empty_message);
+                }
+
+                console.log(response);
+                console.table(response);
+            },
+            error:function(response){
+                console.log(response);
+            }
+        });
+    }
+
 
     $("#frm-user-update").submit(function(e){
         e.preventDefault();
@@ -368,6 +396,67 @@ $(document).ready(function(){
 
         });
     });
+
+    $(document).on("click", ".btn-view-rate", function(event){
+        var test_id = $(this).data("id");
+        $("#test-id").val(test_id);   
+        $.ajax({
+            url: app_url + "backend/getTestimonialById",
+            type : "POST",
+            data : { test_id : test_id},
+            dataType : "json",
+            success: function(response){
+                console.log(response);
+                var res = response.data;
+                if(response.success){
+                    var rate = '';
+                    rate += "RATE : ";
+                    for(var i = 0;i < res.rate;i++){
+                        rate += ' <i class="fa fa-star"></i> ';
+                    }
+                    $("#test-rate").html(rate);
+                    $("#test-comment").html(res.comment);
+                }
+                
+            },
+            error: function(response){
+                console.log(response);
+            }
+
+        });
+    });
+
+    
+    $(document).on("click", ".btn-update-test-status", function(event){
+        var test_id = $(this).data("id");
+        $("#test-id").val(test_id);   
+        $.ajax({
+            url: app_url + "backend/updateTestimonialStatus",
+            type : "POST",
+            data : { test_id : test_id},
+            dataType : "json",
+            success: function(response){
+                console.log(response); 
+                if(response.success){
+                    notify(response.message, "success");
+                    setTimeout(() => {
+                        window.location.reload(); 
+                    }, 1000);
+                }
+                else{
+                    notify(response.message, "error"); 
+                }
+                
+            },
+            error: function(response){
+                console.log(response);
+            }
+
+        });
+    });
+
+    
+
     $(document).on("click", "#btn-add-package-pax", function(event){
         event.preventDefault();
         var html = `<div class="row mb-3" id="div-child-pax-`+ctr+`">
@@ -392,6 +481,12 @@ $(document).ready(function(){
         event.preventDefault();
         var remove_no = $(this).data("no");
         $("#div-child-pax-"+remove_no).remove();
+    });
+    
+    $(document).on("click", "#pagination_link_testimonial .pagination li a", function(event){
+        event.preventDefault();
+        page = $(this).data("ci-pagination-page");
+        load_testimonial_data(page);
     });
  
     $(document).on("click", "#pagination_link_package .pagination li a", function(event){
@@ -430,9 +525,16 @@ $(document).ready(function(){
         console.log(s);
     });
 
+    $(document).on("keyup", "#txt-search-testimonial", function(event){
+        var s = $(this).val();
+        load_user_data(page, s);
+        console.log(s);
+    });
+
     load_package_data(page);
     load_tour_data(page);
     load_user_data(page);
+    load_testimonial_data(page);
 
     function notify(title, type){
         swal({

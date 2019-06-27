@@ -30,6 +30,7 @@ class Frontend extends CI_Controller {
     public function testimonials(){
         $data["curr_path"] = $this->uri->segment(1);
         $data["user"] = $this->session->user;
+        $data["testimonials"] = $this->user->fetch("testimonials", array("status"=>1));
         $this->load->view('frontend/includes/header', $data);
         $this->load->view('frontend/pages/testimonials/testimonials');
         $this->load->view('frontend/includes/footer');
@@ -172,6 +173,41 @@ class Frontend extends CI_Controller {
         );
         $response["data"] = $data;
         $this->session->set_userdata($data);
+        echo json_encode($response);
+    }
+
+    public function saveTestimonial(){
+        $user = $this->session->user;
+        $response["POST"] = $_POST; 
+        $this->validate('comment','Comment', 'required|strip_tags|trim|xss_clean');
+        if( $this->form_validation->run() ){
+            $data = array(
+                "first_name" => $user->first_name,
+                "last_name" => $user->last_name,
+                "contact" => $user->contact_no,
+                "email" => $user->email,
+                "comment" => $this->_post("comment"),
+                "rate" => $this->_post("rating"),
+            ); 
+
+            
+            if($this->user->insert("testimonials", $data)){
+                $response["message"] = "We have successfully received your feedback";
+                $response["success"] = TRUE;   
+            }
+            else{
+                $response['message'] = 'An error occurred';
+                $response['success'] = false;
+            }
+        }
+        else{
+            foreach ($_POST as $key => $value) {
+                $response['messages'][$key] = form_error($key);
+                $response['success'] = false;
+                $response['errormsg'] = false;
+            }
+            $response["message"] = "Please check all your fields";
+        }  
         echo json_encode($response);
     }
 

@@ -34,6 +34,12 @@
             </a>
            
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?= base_url()?>admin/testimonials">
+              <span data-feather="shopping-cart"></span>
+              Testimonials
+            </a>
+          </li>
           
           <li class="nav-item">
             <a class="nav-link" href="<?= base_url()?>admin/logs">

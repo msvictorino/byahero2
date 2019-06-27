@@ -149,6 +149,41 @@ var app_url = protocol + host + path;
                 })
             });
 
+            $(document).on("submit","#frm-testimonial", function(e){
+                e.preventDefault();
+                var formData = $(this).serialize();
+                // var formData =  new FormData(this);
+                $.ajax({
+                    url: app_url + "frontend/saveTestimonial",
+                    type: "POST",
+                    data: formData,
+                    dataType: "json",
+                    success:function(response){
+                        if(response.success){
+                            notify(response.message, "success");
+                            setTimeout(() => {
+                                window.location.reload(); 
+                            }, 500);
+                        }
+                        else{
+                            notify(response.message, "error"); 
+                            var errorMessages = response.messages;
+                            for (const key in errorMessages) {
+                                if (errorMessages.hasOwnProperty(key)) {
+                                    const message = errorMessages[key];
+                                    if(message != "")
+                                        showError(key, message);
+                                }
+                            }
+                        }
+                        console.log(response);
+                    },
+                    error:function(response){
+                        console.log(response);
+                    }
+                });
+            });
+
             $(document).on("submit", "#frm-payment", function(e){
                 e.preventDefault();
                 // var formData = $(this).serialize();

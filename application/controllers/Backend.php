@@ -643,6 +643,156 @@ class Backend extends CI_Controller {
 
     // End Package 
 
+
+    // Testimonials Modules
+    
+    public function getTestimonials(){
+        $this->load->library("pagination");
+        $search = $this->input->get("search");
+        $columns = array(
+            "first_name" => $search, 
+            "last_name" => $search, 
+            "email" => $search, 
+            "contact" => $search, 
+        );
+        
+        $response['test'] = $user = $this->user->fetch_like("testimonials", $columns, $search, "created_at"); 
+
+        $totalUsers = 0;
+        if($search != ""){
+            
+            $user = $this->user->fetch_like("testimonials", $columns, $search, "created_at");
+            if($user)
+                $totalUsers = count($this->user->fetch_like("testimonials", $columns, $search, "created_at")); 
+        }
+        else
+            $totalUsers = count($this->user->fetch("testimonials"));
+         
+        $config = array();
+        $config["base_url"] = "";
+        $config["total_rows"] = $totalUsers;
+        $config["per_page"] = 10;
+        $config["uri_segment"] = 3;
+        $config["use_page_numbers"] = TRUE;
+        $config["full_tag_open"] = '<ul class="pagination justify-content-center">';
+        $config["full_tag_close"] = '</ul>';
+        $config["first_tag_open"] = '<li class="page-item"><a class="page-link" href="#">';
+        $config["first_tag_close"] = '</a></li>';
+        $config["last_tag_open"] = '<li class="page-item">';
+        $config["last_tag_close"] = '</li>';
+        $config['next_link'] = '&gt;';
+        $config["next_tag_open"] = '<li class="page-item">';
+        $config["next_tag_close"] = '</li>';
+        $config["prev_link"] = "&lt;";
+        $config["prev_tag_open"] = '<li class="page-item">';
+        $config["prev_tag_close"] = "</li>";
+        $config["cur_tag_open"] = "<li class='page-item active'><a class='page-link' href='#'>";
+        $config["cur_tag_close"] = "</a></li>";
+        $config["num_tag_open"] = "<li class='page-item'>";
+        $config["num_tag_close"] = "</li>";
+        $config["num_links"] = 1;
+        $config['attributes'] = array('class' => 'page-link');
+        $this->pagination->initialize($config);
+        $page = $this->uri->segment(3);
+        $response["page"] = $page;
+        $start = ($page - 1) * $config["per_page"]; 
+
+        // check if there is a searching 
+        
+        if($search != ""){ 
+            $users = $this->admin->fetchPagination("testimonials", $columns, $search, "created_at", $config["per_page"], $start);
+        }
+        else
+            $users = $this->admin->fetchPagination("testimonials", NULL, NULL, "created_at", $config["per_page"], $start);
+
+        // initialize to check if there are data 
+        $response["success"] = false;
+        $response["users"] = $users;
+        
+        if($users){
+            if(count($users) > 0){
+                $html = '<table class="table table-striped table-sm">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Contact Number</th> 
+                        <th>Rate</th>
+                        <th>Created At</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>';
+                $ctr = 1;
+                foreach($users as $u){
+                    $html .= '<tr>
+                                <td>'. $ctr++ .'</td>
+                                <td class="text-capitalize">'. $u->first_name . ' '. $u->last_name .'</td>
+                                <td class="text-capitalize">'. $u->email .'</td>
+                                <td class="text-capitalize">'. $u->contact .'</td>
+                                <td>';
+                                    for($i = 0; $i < $u->rate; $i++) $html .= '<i class="fa fa-star"></i>'; 
+                                    $html .= 
+                                '</td>
+                                <td>'. $u->created_at .'</td>
+                                <td>'. ($u->status == 1 ? '<span class="badge badge-success">Active</span>' : '<span class="badge badge-danger">Not Active</span>') .'</td>
+                                <td>  
+                                    <button class="btn btn-info btn-sm btn-update-test-status" href="#"  data-id="'. $u->id.'">' . ($u->status == 1 ? 'Deactivate' : 'Activate') . '</button>
+                                    <a class="btn btn-info btn-sm btn-view-rate" href="#" data-toggle="modal" data-target="#view-testimonial-modal" data-id="'. $u->id.'"><i class="fa fa-eye"></i></a>
+                                </td>
+                            </tr>';
+                }
+
+                $response["success"] = TRUE;
+                $response["userTable"] = $html;
+                $response["pagination_link"] = $this->pagination->create_links();
+            }
+        }
+        else{
+            $html = '<div class="alert alert-dark" role="alert">
+                        No Available Data
+                    </div>';
+            $response["empty_message"] = $html;
+        }
+
+
+        echo json_encode($response);
+    }
+
+    public function getTestimonialById(){
+        $testimonial = $this->admin->fetch("testimonials", array("id" => $this->_post("test_id")));
+        $response = array("success" => FALSE);
+        if($testimonial){
+            if(sizeof($testimonial) > 0){
+                $testimonial = $testimonial[0];
+                $response["success"] = TRUE;
+                $response["data"] = $testimonial;
+            } 
+        }
+        echo json_encode($response);
+    }
+
+    public function updateTestimonialStatus(){
+        $where_data = array("id" => $this->_post("test_id"));
+        $testimonial = $this->admin->fetch("testimonials", $where_data );
+        if($testimonial){
+            if(sizeof($testimonial) > 0){
+                $testimonial = $testimonial[0];
+                $update_status_data = array("status" => ($testimonial->status > 0 ? 0 : 1));
+                $this->admin->update("testimonials", $update_status_data,$where_data);
+                $response["success"] = TRUE;
+                $response["message"] = "Update Status Successful";
+                $response["data"] = $testimonial;
+            } 
+        }
+        if(!$response["success"])
+            $response["message"] = "An errorr occurred";
+
+        echo json_encode($response);
+    }
+
     public function createAudit(){
         // $data = array(
         //     "user_type" =>
