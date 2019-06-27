@@ -5,13 +5,19 @@
     <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">BYAHERO</a>
 
     <div class="btn-group mr-2" >
-        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
+        <!-- <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
             Administrator
-        </button>
-        <div class="dropdown-menu dropdown-menu-lg-right">
-            <button class="dropdown-item" type="button">Account</button>
-            <button class="dropdown-item" type="button" id="btn-logout">Logout</button> 
-        </div>
+        </button> -->
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class = "fa fa-user-circle"> </i> Administrator </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+               
+                <a class="text-capitalize dropdown-item" href="<?= base_url() ?>">Main Page</a> 
+                <a class="text-capitalize dropdown-item" href="<?= base_url().'profile' ?>">Profile</a> 
+
+                <a class="text-capitalize dropdown-item" href="" id="btn-logout">Logout</a>
+
+                </a>
+            </div>
     </div>
     <!-- <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search"> -->
     

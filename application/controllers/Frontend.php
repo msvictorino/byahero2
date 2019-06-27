@@ -10,6 +10,7 @@ class Frontend extends CI_Controller {
     //About Us DISPLAY
     public function index(){
         $data["curr_path"] = $this->uri->segment(1);
+        $data["user"] = $this->session->user;
         $this->load->view('frontend/includes/header2', $data);
         $this->load->view('frontend/includes/navbar2');
         $this->load->view('frontend/index');
@@ -19,25 +20,50 @@ class Frontend extends CI_Controller {
     //About Us DISPLAY
     public function about(){
         $data["curr_path"] = $this->uri->segment(1);
+        $data["user"] = $this->session->user;
         $this->load->view('frontend/includes/header', $data);
         $this->load->view('frontend/pages/about');
+        $this->load->view('frontend/includes/footer');
+    }
+
+    //Testimonials DISPLAY
+    public function testimonials(){
+        if($this->session->is_logged_in){
+            $checkData = array("uuid" => $this->session->uuid);
+            if(!($this->user->fetch("users", $checkData)))
+                $this->logout(); 
+            else         
+                $this->session->set_userdata("csrf", NULL);
+        }
+        else{
+            redirect("/");
+        }  
+        $data["curr_path"] = $this->uri->segment(1);
+        $data["user"] = $this->session->user;
+        $data["testimonials"] = $this->user->fetch("testimonials", array("status"=>1));
+        $this->load->view('frontend/includes/header', $data);
+        $this->load->view('frontend/pages/testimonials/testimonials');
         $this->load->view('frontend/includes/footer');
     }
 
     //Travel Promo DISPLAY
     public function promo(){
         $data["curr_path"] = $this->uri->segment(1);
+        $data["user"] = $this->session->user;
         $this->load->view('frontend/includes/header', $data);
         $this->load->view('frontend/pages/promo');
         $this->load->view('frontend/includes/footer');
     }
+
+    
  
     //Travel Packages DISPLAY
     public function package(){
         $curr_path = $this->uri->segment(1); 
         $data["curr_path"] = $this->uri->segment(1);
+        $data["user"] = $this->session->user;
         $region = $this->input->get("region");
-        $destination = $this->input->get("destination");
+        $destination = $this->input->get("destination"); 
         if($region != "" && $region != NULL){
             $regions = $this->user->fetch("locations", array("region" => $region));
             
@@ -51,6 +77,8 @@ class Frontend extends CI_Controller {
                     $data["tours"] = $tours;
                     $data["packages"] = $packages;
                     if($tours){
+                        $prev_url["prev_url"] = $_SERVER['REQUEST_URI'];
+                        $this->session->set_userdata($prev_url);
                         $this->load->view('frontend/includes/header', $data);
                         $this->load->view('frontend/pages/package/package');
                         $this->load->view('frontend/includes/footer'); 
@@ -85,8 +113,40 @@ class Frontend extends CI_Controller {
     //Contact Us DISPLAY
     public function contact(){
         $data["curr_path"] = $this->uri->segment(1);
+        $data["user"] = $this->session->user;
         $this->load->view('frontend/includes/header', $data);
         $this->load->view('frontend/pages/contact');
+        $this->load->view('frontend/includes/footer');
+    }
+
+    //Profile Display
+    public function profile(){
+        if($this->session->is_logged_in){
+            $checkData = array("uuid" => $this->session->uuid);
+            if(!($this->user->fetch("users", $checkData)))
+                $this->logout(); 
+            else         
+                $this->session->set_userdata("csrf", NULL);
+        }
+        else{
+            redirect("/");
+        }  
+        $data["curr_path"] = $this->uri->segment(1);
+        $user = $this->session->user;
+        $transactions = $this->user->fetchTransactionTour(array("user_id" => $user->id));
+        $paymentTransactions = $this->user->fetchTransactionTourPayment(array("user_id" => $user->id));
+        // $this->debug($transactions);
+        // $transactions = $this->user->fetch("transactions", array("user_id" => $this->session->user->id ));
+        // $tours = array();
+        // foreach ($transactions as $t) {
+        //     $tour = $this->user->fetch("tours")
+        // }
+        $data["transactions"] = $transactions;
+        $data["paymentTransactions"] = $paymentTransactions;
+        $data["user"] = $user;
+
+        $this->load->view('frontend/includes/header', $data);
+        $this->load->view('frontend/pages/profile/index');
         $this->load->view('frontend/includes/footer');
     }
 
@@ -96,12 +156,14 @@ class Frontend extends CI_Controller {
     }
 
     public function noPackage($data){ 
+        $data["user"] = $this->session->user;
         $this->load->view('frontend/includes/header', $data);
         $this->load->view('frontend/pages/package/no-package');
         $this->load->view('frontend/includes/footer');
     }
 
     public function noTours($data){ 
+        $data["user"] = $this->session->user;
         $this->load->view('frontend/includes/header', $data);
         $this->load->view('frontend/pages/package/no-tours');
         $this->load->view('frontend/includes/footer');
@@ -109,7 +171,7 @@ class Frontend extends CI_Controller {
 
 
     public function savePackage(){
-        $response = array("success" => TRUE, "message" => "Redirecting to Booking Page");
+        $response = array("success" => TRUE, "message" => "Redirecting to Booking Page"); 
         $data = array(
             "tour_id" => $this->_post("tour_id"),
             "package_id" => $this->_post("package"),
@@ -117,13 +179,54 @@ class Frontend extends CI_Controller {
             "day" => $this->_post("day"),
             "month" => $this->_post("month"),
             "year" => $this->_post("year"),
-            "is_booking" => TRUE,
+            "is_booking" => TRUE, 
         );
-
+        $response["data"] = $data;
         $this->session->set_userdata($data);
         echo json_encode($response);
     }
 
+    public function saveTestimonial(){
+        $user = $this->session->user;
+        $response["POST"] = $_POST; 
+        $this->validate('comment','Comment', 'required|strip_tags|trim|xss_clean');
+        if( $this->form_validation->run() ){
+            $data = array(
+                "first_name" => $user->first_name,
+                "last_name" => $user->last_name,
+                "contact" => $user->contact_no,
+                "email" => $user->email,
+                "comment" => $this->_post("comment"),
+                "rate" => $this->_post("rating"),
+            ); 
+
+            
+            if($this->user->insert("testimonials", $data)){
+                $response["message"] = "We have successfully received your feedback";
+                $response["success"] = TRUE;   
+            }
+            else{
+                $response['message'] = 'An error occurred';
+                $response['success'] = false;
+            }
+        }
+        else{
+            foreach ($_POST as $key => $value) {
+                $response['messages'][$key] = form_error($key);
+                $response['success'] = false;
+                $response['errormsg'] = false;
+            }
+            $response["message"] = "Please check all your fields";
+        }  
+        echo json_encode($response);
+    }
+
+    
+    public function debug($data){
+        echo "<pre>";
+        print_r($data);
+        echo "</pre>";
+    }
     
     public function createAudit(){
         // $data = array(

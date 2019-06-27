@@ -73,6 +73,83 @@ class Admin extends CI_Controller {
         redirect("/");
     }
 
+    public function testimonials(){ 
+        $data["curr_path"] = $this->uri->segment(1);
+        $this->load->view('backend/includes/header', $data);
+        $this->load->view('backend/modules/testimonials');
+        $this->load->view('backend/includes/footer');
+    }
+
+    public function packages(){
+        // echo password_hash("secret", PASSWORD_DEFAULT);
+#        $2y$10$3u6fX1hjLRtI/Nzhaj82BOA2A0ZQSQz9yMa0XGPrD3h0o5qKAwhLm
+        // echo password_verify("secret", "$2y$10$3u6fX1hjLRtI/Nzhaj82BOA2A0ZQSQz9yMa0XGPrD3h0o5qKAwhLm");
+        $data["curr_path"] = $this->uri->segment(1);
+        $this->load->view('backend/includes/header', $data);
+        $this->load->view('backend/modules/package/package');
+        $this->load->view('backend/includes/footer');
+    }
+
+    public function tours(){
+        // echo password_hash("secret", PASSWORD_DEFAULT);
+#        $2y$10$3u6fX1hjLRtI/Nzhaj82BOA2A0ZQSQz9yMa0XGPrD3h0o5qKAwhLm
+        // echo password_verify("secret", "$2y$10$3u6fX1hjLRtI/Nzhaj82BOA2A0ZQSQz9yMa0XGPrD3h0o5qKAwhLm");
+        $data["curr_path"] = $this->uri->segment(1);
+        $this->load->view('backend/includes/header', $data);
+        $this->load->view('backend/modules/package/list_tours');
+        $this->load->view('backend/includes/footer');
+    }
+
+    public function locations(){
+        // echo password_hash("secret", PASSWORD_DEFAULT);
+#        $2y$10$3u6fX1hjLRtI/Nzhaj82BOA2A0ZQSQz9yMa0XGPrD3h0o5qKAwhLm
+        // echo password_verify("secret", "$2y$10$3u6fX1hjLRtI/Nzhaj82BOA2A0ZQSQz9yMa0XGPrD3h0o5qKAwhLm");
+        $data["curr_path"] = $this->uri->segment(1);
+        $this->load->view('backend/includes/header', $data);
+        $this->load->view('backend/modules/package/list_locations');
+        $this->load->view('backend/includes/footer');
+    }
+
+    public function location_create(){
+        // echo password_hash("secret", PASSWORD_DEFAULT);
+#        $2y$10$3u6fX1hjLRtI/Nzhaj82BOA2A0ZQSQz9yMa0XGPrD3h0o5qKAwhLm
+        // echo password_verify("secret", "$2y$10$3u6fX1hjLRtI/Nzhaj82BOA2A0ZQSQz9yMa0XGPrD3h0o5qKAwhLm");
+        $data["curr_path"] = $this->uri->segment(1);
+        $this->load->view('backend/includes/header', $data);
+        $this->load->view('backend/modules/package/location_create');
+        $this->load->view('backend/includes/footer');
+    }
+
+    public function tour_create(){
+        // echo password_hash("secret", PASSWORD_DEFAULT);
+#        $2y$10$3u6fX1hjLRtI/Nzhaj82BOA2A0ZQSQz9yMa0XGPrD3h0o5qKAwhLm
+        // echo password_verify("secret", "$2y$10$3u6fX1hjLRtI/Nzhaj82BOA2A0ZQSQz9yMa0XGPrD3h0o5qKAwhLm");
+        $data["curr_path"] = $this->uri->segment(1);
+        $this->load->view('backend/includes/header', $data);
+        $this->load->view('backend/modules/package/create_tour');
+        $this->load->view('backend/includes/footer');
+    }
+
+    public function package_create(){
+        // echo password_hash("secret", PASSWORD_DEFAULT);
+#        $2y$10$3u6fX1hjLRtI/Nzhaj82BOA2A0ZQSQz9yMa0XGPrD3h0o5qKAwhLm
+        // echo password_verify("secret", "$2y$10$3u6fX1hjLRtI/Nzhaj82BOA2A0ZQSQz9yMa0XGPrD3h0o5qKAwhLm");
+        $data["curr_path"] = $this->uri->segment(1);
+        $this->load->view('backend/includes/header', $data);
+        $this->load->view('backend/modules/package/create_packages');
+        $this->load->view('backend/includes/footer');
+    }
+
+    public function package_create_price(){
+        // echo password_hash("secret", PASSWORD_DEFAULT);
+#        $2y$10$3u6fX1hjLRtI/Nzhaj82BOA2A0ZQSQz9yMa0XGPrD3h0o5qKAwhLm
+        // echo password_verify("secret", "$2y$10$3u6fX1hjLRtI/Nzhaj82BOA2A0ZQSQz9yMa0XGPrD3h0o5qKAwhLm");
+        $data["curr_path"] = $this->uri->segment(1);
+        $this->load->view('backend/includes/header', $data);
+        $this->load->view('backend/modules/package/create_packages2');
+        $this->load->view('backend/includes/footer');
+    }
+
 
     
 }

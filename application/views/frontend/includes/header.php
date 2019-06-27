@@ -7,9 +7,17 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Byahero</title>
 
+    <!-- Custom styles for this template -->
+    <link href="<?= base_url()?>assets/custom/frontend/css/agency.css" rel="stylesheet">
+
     <!-- Bootstrap -->
     <link href="<?= base_url().'assets/css/bootstrap.min.css'?>" rel="stylesheet">
-    <link rel="stylesheet" href="<?= base_url() ?>assets/vendor/css/fontawesome.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="<?= base_url() ?>assets/vendor/fonts/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
 
     <!-- Scripts -->
     <script src="<?= base_url() ?>assets/vendor/js/sweetalert.js"></script>
@@ -18,11 +26,13 @@
     <script src="<?= base_url() ?>assets/js/bootstrap.min.js"></script>
     <script src="<?= base_url() ?>assets/custom/frontend/js/frontend.js"></script>
     
+    
+
   </head>
   <body>
- 
   <?php 
-        $this->load->view('frontend/includes/navbar'); 
+  $this->load->view('frontend/includes/navbar');
   ?>
+  
  
-  <main role="main" class="container-fluid">
+  <body id="page-top">

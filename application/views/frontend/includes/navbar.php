@@ -1,17 +1,48 @@
-<nav class="navbar navbar-expand-md navbar-dark mb-4" style="background-color: #FE9900;">
-    <a class="navbar-brand" href="#"><b>BYAHERO</a></b>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav mr-auto">
+<nav class="navbar navbar-expand-lg navbar-dark" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand" href="#">Byahero</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+      </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav text-uppercase ml-auto">
             <li class="nav-item">
-                <a href="<?= base_url() ?>" class="nav-link <?= $curr_path == '' ? 'active' : '' ?>"> Home</a>
+                <a class="nav-link js-scroll-trigger" href="<?= base_url() ?>">Home</a>
             </li>
-        </ul>
-        <!-- <form class="form-inline mt-2 mt-md-0">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit"> <i class="fa fa-user icon"></i> LOGIN</button>
-        </form> -->
+            <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="<?= base_url() ?>#about">About Us</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="<?= base_url() ?>#team">Travel Packages</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="<?= base_url() ?>#contactus">Contact Us</a>
+            </li>
+            
+            <?php if($this->session->is_logged_in): ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?= base_url() ?>testimonials">Testimonials</a>
+                </li>
+            <?php endif; ?>
+            
+            
+          <?php if($this->session->is_logged_in): ?> 
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class = "fa fa-user-circle"> </i> Hi, <?= $user->first_name . ' ' . $user->last_name ?></a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <?php if( $this->session->role == "admin" ): ?>
+                        <a class="text-capitalize dropdown-item" href="<?= base_url().'admin'?>">Administrator</a>
+                    <?php endif; ?>
+                    <a class="text-capitalize dropdown-item" href="<?= base_url() ?>frontend/profile">Account</a> 
+                    <a class="text-capitalize dropdown-item" href="" id="btn-logout">Logout</a> 
+                    </a>
+                </div>
+            </li>
+            <?php endif; ?>
+            
+            </ul>
+        </div>
     </div>
 </nav>
  

@@ -1,4 +1,4 @@
-    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+ <nav class="col-md-2 d-none d-md-block bg-light sidebar">
       <div class="sidebar-sticky">
         <ul class="nav flex-column">
           <li class="nav-item">
@@ -13,10 +13,31 @@
               Users
             </a>
           </li>
+
           <li class="nav-item">
-            <a class="nav-link" href="<?= base_url()?>admin/package">
+            <a class="nav-link" href="<?= base_url()?>admin/locations">
+              <span data-feather="shopping-cart"></span>
+              Location
+            </a> 
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="<?= base_url()?>admin/tours">
+              <span data-feather="shopping-cart"></span>
+              Tours
+            </a> 
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?= base_url()?>admin/packages">
               <span data-feather="shopping-cart"></span>
               Packages
+            </a>
+           
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?= base_url()?>admin/testimonials">
+              <span data-feather="shopping-cart"></span>
+              Testimonials
             </a>
           </li>
           
