@@ -6,50 +6,64 @@
     <div class = "row">
     <div class = col-md-7>
     <form class="form-inline ">
-        <input class="form-control mr-md-2" id="txt-search" type="search" placeholder="Search" aria-label="Search">
+        <input class="form-control mr-md-2" id="txt-search-package" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success my-3" type="submit">Search</button>  
     </form>
     </div>
-    <!-- <div class = col-md-5>
-    <a href = "<?= base_url()?>admin/tour_create" class="btn btn-info my-3 pull-right" style = "color:white;"> <i class = "fa fa-plus"> </i> Add Tour</a>
-    </div> -->
+    <div class = col-md-5>
+        <!-- <a href = "<?= base_url()?>admin/package_create" class="btn btn-info my-3 pull-right" style = "color:white;"> <i class = "fa fa-plus"> </i> Add Package</a> -->
+    </div>
     </div>
     <section>
 
-        <div class="table-responsive">
-            <table class = "table table-striped table-sm"> 
-                <thead> 
-                    <tr>   
-                        <th>Package Name</th>   
-                        <th>Tour Name</th>   
-                        <th>Region</th> 
-                        <th>Actions</th> 
-                    </tr>
-                </thead>
-
-                <tbody>
-                    <tr>
-                        <td> Mactan Island Hopping (Exclusive) </td>
-                        <td> CEBU OPTIONAL TOURS</td>
-                        <td> Cebu </td>
-                        <td> <a class = "btn btn-primary btn-sm"> <i class = "fa fa-eye" style = "color:white;"> </i>  </a>
-                             <a class = "btn btn-danger btn-sm"> <i class = "fa fa-trash-o" style = "color:white;"> </i>  </a>
-                             <a class = "btn btn-warning btn-sm"style = "color:white;"> <i class = "fa fa-edit" style = "color:white;"> </i>  </a>
-                        </td>
-                    </tr>
-
-                <tbody>
-
-            </table>
+        <div class="table-responsive" id="package_table">
         
         </div>
         
-        <nav aria-label="Page navigation example" id="pagination_link">
+        <nav aria-label="Page navigation example" id="pagination_link_package">
 
         </nav>
+        
         
         
 
         
 
     </section>
+
+    
+<!-- Modal -->
+<div class="modal fade" id="add-package-pax-modal" tabindex="-1" role="dialog" aria-labelledby="add-package-pax-modalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form id="frm-package-pax">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="add-package-pax-modalLabel">Add Package Pax</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="package_id" id="package-id">
+                    <div class="container"> 
+                        <div class="row">
+                            <div class="col">
+                                <h5>Pax per price</h5>
+                                <p>Examples:</p>
+                                <p> 1pax - P3,000.00 : Total P3,000.00</p>
+                                <p> 2pax = P1,600.00 : Total P3,200.00</p>
+                                <button class="btn btn-info btn-sm" id="btn-add-package-pax"><i class="fa fa-plus"></i></button>
+                            </div>
+                        </div>
+                        <div id="div-package-pax">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

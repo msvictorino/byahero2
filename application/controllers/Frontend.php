@@ -20,6 +20,7 @@ class Frontend extends CI_Controller {
     //About Us DISPLAY
     public function about(){
         $data["curr_path"] = $this->uri->segment(1);
+        $data["user"] = $this->session->user;
         $this->load->view('frontend/includes/header', $data);
         $this->load->view('frontend/pages/about');
         $this->load->view('frontend/includes/footer');
@@ -28,6 +29,7 @@ class Frontend extends CI_Controller {
     //Testimonials DISPLAY
     public function testimonials(){
         $data["curr_path"] = $this->uri->segment(1);
+        $data["user"] = $this->session->user;
         $this->load->view('frontend/includes/header', $data);
         $this->load->view('frontend/pages/testimonials/testimonials');
         $this->load->view('frontend/includes/footer');
@@ -36,6 +38,7 @@ class Frontend extends CI_Controller {
     //Travel Promo DISPLAY
     public function promo(){
         $data["curr_path"] = $this->uri->segment(1);
+        $data["user"] = $this->session->user;
         $this->load->view('frontend/includes/header', $data);
         $this->load->view('frontend/pages/promo');
         $this->load->view('frontend/includes/footer');
@@ -47,6 +50,7 @@ class Frontend extends CI_Controller {
     public function package(){
         $curr_path = $this->uri->segment(1); 
         $data["curr_path"] = $this->uri->segment(1);
+        $data["user"] = $this->session->user;
         $region = $this->input->get("region");
         $destination = $this->input->get("destination"); 
         if($region != "" && $region != NULL){
@@ -98,6 +102,7 @@ class Frontend extends CI_Controller {
     //Contact Us DISPLAY
     public function contact(){
         $data["curr_path"] = $this->uri->segment(1);
+        $data["user"] = $this->session->user;
         $this->load->view('frontend/includes/header', $data);
         $this->load->view('frontend/pages/contact');
         $this->load->view('frontend/includes/footer');
@@ -140,12 +145,14 @@ class Frontend extends CI_Controller {
     }
 
     public function noPackage($data){ 
+        $data["user"] = $this->session->user;
         $this->load->view('frontend/includes/header', $data);
         $this->load->view('frontend/pages/package/no-package');
         $this->load->view('frontend/includes/footer');
     }
 
     public function noTours($data){ 
+        $data["user"] = $this->session->user;
         $this->load->view('frontend/includes/header', $data);
         $this->load->view('frontend/pages/package/no-tours');
         $this->load->view('frontend/includes/footer');

@@ -22,13 +22,9 @@
             <a class="nav-link js-scroll-trigger" href="#contactus">Contact Us</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?= base_url() ?>frontend/testimonials">Testimonials</a>
+            <a class="nav-link" href="<?= base_url() ?>testimonials">Testimonials</a>
           </li>
-          <!-- <?php if($this->session->is_logged_in && $this->session->role == "admin" ): ?>
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="<?= base_url() ?>admin">Administrator</a>
-            </li>
-          <?php endif; ?> -->
+          
           
           <?php if(!$this->session->is_logged_in): ?>
           <li class="nav-item">

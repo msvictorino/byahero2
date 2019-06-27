@@ -36,12 +36,7 @@ class User_model extends CI_Model {
     }
 
     function fetch_like($table, $columns = NULL, $like = NULL, $order = NULL){  
-        if($like !== NULL && $like != ""){
-            // if($columns != NULL){
-            //     foreach($columns as $c){
-            //         $this->db->like($c, $like, 'both');
-            //     }
-            // }
+        if($like !== NULL && $like != ""){ 
             $this->db->or_like($columns);
         }
         if($order !== NULL){
