@@ -28,6 +28,16 @@ class Frontend extends CI_Controller {
 
     //Testimonials DISPLAY
     public function testimonials(){
+        if($this->session->is_logged_in){
+            $checkData = array("uuid" => $this->session->uuid);
+            if(!($this->user->fetch("users", $checkData)))
+                $this->logout(); 
+            else         
+                $this->session->set_userdata("csrf", NULL);
+        }
+        else{
+            redirect("/");
+        }  
         $data["curr_path"] = $this->uri->segment(1);
         $data["user"] = $this->session->user;
         $data["testimonials"] = $this->user->fetch("testimonials", array("status"=>1));
